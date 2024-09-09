@@ -35,30 +35,11 @@ void	init()
 
 int	main(int ac, char **av)
 {
-	(void)ac; (void)av;
-	void	*mlx;
-	/*
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	time;
-	double	oldTime;
+	(void)ac;
+	(void)av;
 
-	posX = 22;
-	posY = 12;
-	dirX = -1;
-	dirY = 0;
-	planeX = 0;
-	planeY = 0.66;
-	time = 0;
-	oldTime = 0;
-	*/
+	// init the game
 
-	mlx = mlx_init();
-	mlx_new_window(mlx, screen_width, screen_height, "Hello world!");
-	mlx_loop(mlx);
+
 	return (0);
 }
