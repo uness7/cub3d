@@ -33,7 +33,7 @@ void	init()
 {
 }
 
-void	main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	(void)ac; (void)av;
 	void	*mlx;
@@ -58,9 +58,7 @@ void	main(int ac, char **av)
 	*/
 
 	mlx = mlx_init();
-	if (mlx == -1)
-		return (EXIT_FAILURE);
 	mlx_new_window(mlx, screen_width, screen_height, "Hello world!");
 	mlx_loop(mlx);
-
+	return (0);
 }
