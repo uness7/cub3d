@@ -1,6 +1,6 @@
 # include "cub3d.h"
 
-/* Calculating ray using player's coordinates and the fov */
+/*
 void	calc_ray(int x, t_ray *ray, t_vector *player, t_camera *camera)
 {
 	double	camera_x;
@@ -29,3 +29,4 @@ t_vector	ft_rotate_vector(t_vector v1, t_vector v2)
 t_vector	ft_add_vector(t_vector v1, t_vector v2)
 {
 }
+*/

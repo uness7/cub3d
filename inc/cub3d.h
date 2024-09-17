@@ -7,76 +7,103 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define map_width 24
-# define map_height 24
+/* Defines */
+
+# define MAP_WIDTH 24
+# define MAP_HEIGHT 24
 # define SCREEN_WIDTH 640
 # define SCREEN_HEIGHT 480
 # define NUM_TEXTURES 2
+# define FOV 60
+# define TILESIZE 40
 
-/* Definitions: */
-// FOV a.k.a Field Of View => in the context of optical devices, it refers to the max
-// 	area that the device can capture.
-//
-// 	Using the player's looking angle and his coordinates, we can 
-// 		determine the rays' vector.
-//
 
 /*
  * - Horizontal Grid Lines is the (NORTH & SOUTH).
  * - Vertical Grid Lines is the (WEST & EAST).
- *
  */
 
-typedef struct s_mlx_
+typedef enum e_valid_chars
 {
-	int		*texture_buffer[NUM_TEXTURES];
-	void	*mlx;
-	void	*win;
-}	t_mlx;
+	EMPTY = '0',
+	WALL = '1',
+	NORTH = 'N',
+	SOUTH = 'S',
+	WEST = 'W',
+	EAST = 'E'
 
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
+}	t_valid_chars;
 
-typedef struct s_camera
+typedef struct e_orientation
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	left_plane_half;
-	t_vector	iter;
-	t_vector	ray;
-	t_vector	intersect_pos;
-	double	projection_plane_distance;
-	double	projection_plane_size;
-}	t_camera;
+	HORIZONTAL,
+	VERTICAL
 
-typedef struct s_player
+}	t_orientation;
+
+
+/* Typedefs */
+
+typedef struct s_map
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	plane;
-	//
-}	t_player;
+	char	*file;
+	char	**file_arr;
+	char	**item_line;
+	t_texture	textures;
+	t_color		floor;
+	t_color		ceiling;
+	int		*color_arr;
+	char		**map_cpy;
+	unsigned int	max_y;
+	unsigned int	max_x;
+	unsigned int	*x_row;;
+	
+}	t_map;
 
 typedef struct s_ray
 {
-	t_vector	dir;
-	t_vector	pos;
-	//
+	double		angle;
+	double		distance;
+	double		wall_l;
+	double		x_h;
+	double		x_v;
+	double		y_h;
+	double		y_v;
+	t_orientation	type;
 }	t_ray;
 
-typedef struct s_cub_env
+typedef struct s_color
 {
-	t_camera	camera;
-}		t_cub_env;
+	int		rgb;
+	int		r;
+	int		g;
+	int		b;
+}	t_color;
 
-extern t_cub_env	g_cub_env;
 
+typedef struct s_player
+{
+
+}	t_player;
+
+typedef struct s_mlx
+{
+	// we need image struct in here
+	void	*mlx;
+	void	*win;
+
+}	t_mlx;
+
+typedef struct s_game
+{
+	t_map		*map;
+	t_player	player;
+	t_ray		ray;
+	t_mlx		*mlx;
+
+}	t_game;
 
 /* ------ Functions Prototype -------- */
-void		calc_ray(void);
 
 
 
