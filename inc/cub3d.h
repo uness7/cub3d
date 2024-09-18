@@ -11,17 +11,21 @@
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 1200 
 # define NUM_TEXTURES 2
 # define FOV 60
 # define TILESIZE 40
+# define ROTSPEED 20
+# define MOVESPEED 3
+# define MMAP_WALL 0x000000FF
+# define MMAP_SPACE 0xFFFFFFFF
+# define TRANSPARENT 0x00000000
+# define MMAP_PLAYER 0xFF0000FF
 
 
-/*
- * - Horizontal Grid Lines is the (NORTH & SOUTH).
- * - Vertical Grid Lines is the (WEST & EAST).
- */
+
+
 
 typedef enum e_valid_chars
 {
@@ -41,9 +45,6 @@ typedef struct e_orientation
 
 }	t_orientation;
 
-
-/* Typedefs */
-
 typedef struct s_map
 {
 	char	*file;
@@ -57,7 +58,8 @@ typedef struct s_map
 	unsigned int	max_y;
 	unsigned int	max_x;
 	unsigned int	*x_row;;
-	
+	mlx_image_t	*map_img;	
+
 }	t_map;
 
 typedef struct s_ray
@@ -80,28 +82,43 @@ typedef struct s_color
 	int		b;
 }	t_color;
 
+typedef struct s_texture
+{
+	char			*north;
+	mlx_texture_t	*north_tx;
+	char			*south;
+	mlx_texture_t	*south_tx;
+	char			*west;
+	mlx_texture_t	*west_tx;
+	char			*east;
+	mlx_texture_t	*east_tx;
+
+}	t_texture; 
 
 typedef struct s_player
 {
+	t_valid_chars	orientation;
+	double		angle;
+	double		rd_fov;
+	double		x;
+	double		y;
+	int			ws;
+	int			ad;
+	int			rotate;
 
 }	t_player;
-
-typedef struct s_mlx
-{
-	// we need image struct in here
-	void	*mlx;
-	void	*win;
-
-}	t_mlx;
 
 typedef struct s_game
 {
 	t_map		*map;
 	t_player	player;
+	t_texture	textures;
 	t_ray		ray;
-	t_mlx		*mlx;
+	mlx_t		*mlx;
+	mlx_image_t	*pixel;
 
 }	t_game;
+
 
 /* ------ Functions Prototype -------- */
 
