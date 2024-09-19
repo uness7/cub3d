@@ -3,10 +3,13 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <math.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # include "../mlx/include/MLX42/MLX42.h"
-# include <stdbool.h>
+
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
@@ -116,7 +119,14 @@ typedef struct s_game
 
 
 /* ------ Functions Prototype -------- */
+
+/* ---- src/parser/ ---- */
 void	parser(int ac, char **av);
+
+/* ---- src/utils/ ---- */
+bool	check_file_format(const char *file_path, char *format);
+
+
 
 
 
