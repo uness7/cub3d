@@ -4,10 +4,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include <mlx.h>
+# include "../libft/libft.h"
+# include "../mlx/include/MLX42/MLX42.h"
 # include <stdbool.h>
-
-/* Defines */
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
@@ -24,9 +23,6 @@
 # define MMAP_PLAYER 0xFF0000FF
 
 
-
-
-
 typedef enum e_valid_chars
 {
 	EMPTY = '0',
@@ -38,29 +34,11 @@ typedef enum e_valid_chars
 
 }	t_valid_chars;
 
-typedef struct e_orientation
+typedef enum e_orientation
 {
 	HORIZONTAL,
 	VERTICAL
-
 }	t_orientation;
-
-typedef struct s_map
-{
-	char	*file;
-	char	**file_arr;
-	char	**item_line;
-	t_texture	textures;
-	t_color		floor;
-	t_color		ceiling;
-	int		*color_arr;
-	char		**map_cpy;
-	unsigned int	max_y;
-	unsigned int	max_x;
-	unsigned int	*x_row;;
-	mlx_image_t	*map_img;	
-
-}	t_map;
 
 typedef struct s_ray
 {
@@ -95,6 +73,23 @@ typedef struct s_texture
 
 }	t_texture; 
 
+typedef struct s_map
+{
+	char	*file;
+	char	**file_arr;
+	char	**item_line;
+	t_texture	textures;
+	t_color		floor;
+	t_color		ceiling;
+	int		*color_arr;
+	char		**map_cpy;
+	unsigned int	max_y;
+	unsigned int	max_x;
+	unsigned int	*x_row;;
+	mlx_image_t	*map_img;	
+
+}	t_map;
+
 typedef struct s_player
 {
 	t_valid_chars	orientation;
@@ -121,7 +116,7 @@ typedef struct s_game
 
 
 /* ------ Functions Prototype -------- */
-
+void	parser(int ac, char **av);
 
 
 

@@ -1,0 +1,13 @@
+NO ./textures/colors/color1.png
+SO ./textures/colors/color2.png
+EA ./textures/colors/color3.png
+WE ./textures/colors/color4.png
+C 255,0,255
+F 255,255,0
+
+   11111111111111111111111
+1110000000000000001100000011
+101110S00111000001 101000001
+1100100000011111001100000001
+  111111111    110000111111
+                111111
