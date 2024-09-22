@@ -3,7 +3,7 @@ BUILD = build
 SRCS = $(shell find $(S) -name "*.c")
 OBJS = $(patsubst $(S)/%.c,$(BUILD)/%.o,$(SRCS))
 CC = cc
-FLAGS = -Wall -Wextra -Werror -Iinc -I./libft -Imlx
+FLAGS = #-Wall -Wextra -Werror -Iinc -I./libft -Imlx
 
 MLX_LIB = mlx/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBFT_DIR = ./libft
@@ -26,7 +26,7 @@ $(TARGET): $(OBJS) $(LIBFT)
 	printf "$(GREEN)Compilation finished\n$(WHITE)"
 
 $(BUILD)/%.o: $(S)/%.c | $(BUILD) $(DIRS)
-	mkdir -p $(dir $@)        # Create the necessary subdirectories
+	mkdir -p $(dir $@)
 	$(CC) $(FLAGS) -c $< -o $@
 	printf "$(BLUE)> Compiled: $<$(WHITE)\n"
 

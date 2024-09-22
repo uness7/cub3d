@@ -56,16 +56,29 @@ char			*ft_strjoin(const char *s1, const char *s2);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strtrim(const char *s1, const char *set);
 char			*ft_substr(const char *s, unsigned int start, size_t len);
+int			ft_isspace(char c);
+
+
+/* 2D arrays functions */
+void			ft_put2d_char(char **arr);
+void			ft_free_2d_char(char **arr);
+int					ft_size_2d_arr(void **arr);
+
+
+/* Lists functions */
+t_list			*ft_lstlast(t_list *lst);
+t_list			*ft_lstmap(t_list *lst,
+					void *(*f)(void *), void (*del)(void *));				
+t_list			*ft_lstnew(void *content);
+int				ft_lstsize(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstlast(t_list *lst);
-t_list			*ft_lstmap(t_list *lst,
-					void *(*f)(void *), void (*del)(void *));
-t_list			*ft_lstnew(void *content);
-int				ft_lstsize(t_list *lst);
+
+/* GNL functions */
 char			*get_next_line(int fd);
+
 
 #endif
