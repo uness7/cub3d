@@ -1,7 +1,7 @@
 # include "../../inc/cub3d.h"
 #include <stdbool.h>
 #include <stdio.h>
-
+// IsFull = True;
 bool	check_first_nd_last_char(char **map, int rows)
 {
     int     i;

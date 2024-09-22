@@ -23,6 +23,7 @@ bool	is_textures_diff(char **textures)
 	}
 	if (counter == 4)
 		return (true);
+    ft_putstr_fd("Something wrong with textures\n", 2);
 	return (false);
 }
 
@@ -39,11 +40,13 @@ bool	is_textures_formats(char **textures)
 		if (!split || !split[1])
 		{
 			ft_free_2d_char(split);
+            ft_putstr_fd("Something is wrong with the textures\n", 2);
 			return (false);
 		}
 		path = split[1];
 		if (check_file_format(path, "png") == false)
 		{
+            ft_putstr_fd("One of the textures files has invalid format\n", 2);
 			ft_free_2d_char(split);
 			return (false);
 		}
@@ -60,6 +63,7 @@ bool	validate_rgb_values(char *rgb)
 	if (!split || !split[0] || !split[1] || !split[2])
 	{
 		ft_free_2d_char(split);
+        ft_putstr_fd("Something wrong with colors\n", 2);
 		return (false);
 	}
 	int		r = ft_atoi(split[0]);
@@ -68,6 +72,7 @@ bool	validate_rgb_values(char *rgb)
 	ft_free_2d_char(split);
 	if ((r <= 255 &&  r >= 0) && (g <= 255 && g >= 0) && (b <= 255 && b >= 0))
 		return (true);
+    ft_putstr_fd("One or more RGB values is not valid\n", 2);
 	return (false);
 }
 
@@ -84,6 +89,7 @@ bool	is_valid_colors(char **colors)
 		if (!split || !split[1])
 		{
 			ft_free_2d_char(split);
+            ft_putstr_fd("Something wrong with colors\n", 2);
 			return (false);
 		}
 		rgb = split[1];
@@ -107,12 +113,13 @@ bool	is_colors_diff(char **colors)
 	i = -1;
 	while (colors[++i])
 	{
-		if (ft_strncmp(colors[i], "F", 1) == 0)
+		if (ft_strncmp(colors[i], "F ", 2) == 0)
 			counter++;
-		else if (ft_strncmp(colors[i], "C", 1) == 0)
+		else if (ft_strncmp(colors[i], "C ", 2) == 0)
 			counter++;
 	}
 	if (counter == 2)
 		return (true);
+    ft_putstr_fd("Floor or Ceiling colors is not valid (maybe both)\n", 2);
 	return (false);	
 }

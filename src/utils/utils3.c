@@ -1,12 +1,7 @@
 # include "../../inc/cub3d.h"
-# include <ctype.h>
-#include <stdbool.h>
-#include <stdio.h>
-# include <string.h>
 
 // IsFull = True;
 
-// Rule 1 : the map should only be composed of {0, 1, N, S, E, W}
 bool	is_composed_of_valid_chars(char **map)
 {
     int		i;
@@ -23,7 +18,10 @@ bool	is_composed_of_valid_chars(char **map)
                     && map[i][j] != 'W' && map[i][j] != 'E' \
                     && map[i][j] != ' '
                     && map[i][j] != '\n')
+            {
+                ft_putstr_fd("Map is composed of multi valid chars\n", 2);
                 return (false);
+            }
             j++;
         }
         i++;
@@ -31,7 +29,6 @@ bool	is_composed_of_valid_chars(char **map)
     return (true);
 }
 
-// Rule 2 : 
 bool 	check_first_nd_last_rows(char **map, int rows)
 {
     int         i;
@@ -62,7 +59,6 @@ bool 	check_first_nd_last_rows(char **map, int rows)
 	return (true);
 }
 
-/* Helper Function */
 static bool is_char_repeated(char **map, int rows)
 {
     int         i;
@@ -76,7 +72,7 @@ static bool is_char_repeated(char **map, int rows)
     while (++i < rows)
     {
         j = 0;
-        len = strlen(map[i]);
+        len = ft_strlen(map[i]);
         while (j <= len - 1)
         {
             if (map[i][j] == 'S' || map[i][j] == 'N'\
@@ -93,7 +89,6 @@ static bool is_char_repeated(char **map, int rows)
 	return (true);
 }
 
-// Rule 3:
 bool    has_multi_valid_chars(char **map, int rows)
 {
     if (!is_char_repeated(map, rows))

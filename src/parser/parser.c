@@ -29,6 +29,11 @@ static void	validate_colors(char **cpy_lines)
 		ft_putstr_fd("printing colors: \n", 1);
 		ft_put2d_char(colors);
 	}
+	else
+	{
+		ft_putstr_fd("Error detected in map\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	ft_free_2d_char(colors);
 }
 
@@ -71,7 +76,11 @@ static void	validate_textures(char **cpy_lines)
 		ft_put2d_char(textures);
 	}
 	else
+	{
+	
 		ft_putstr_fd("Error detected in map!\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	ft_free_2d_char(textures);
 }
 
@@ -80,9 +89,7 @@ void	parse_textures_colors(char **lines /*, t_game *game*/)
 	char	**cpy_lines;
 
 	cpy_lines = lines;
-	cpy_lines = ft_remove_empyt_lines(cpy_lines);
-	//ft_put2d_char(cpy_lines);
-	//ft_putstr_fd("\n", 1);
+	cpy_lines = ft_remove_empyt_lines(cpy_lines);	
 	validate_textures(cpy_lines);
 	validate_colors(cpy_lines);
 	ft_free_2d_char(cpy_lines);
