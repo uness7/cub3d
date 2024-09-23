@@ -53,7 +53,19 @@ void    print_game_data(t_game *game)
     printf("\n");
 
     /* Printing the player's coordinates */
+    if (game->player.orientation == NORTH)
+        printf("Player's orientation is north\n");
+    if (game->player.orientation == SOUTH)
+        printf("Player's orientation is south\n");
+    if (game->player.orientation == EAST)
+        printf("Player's orientation is east\n");
+    if (game->player.orientation == WEST)
+        printf("Player's orientation is west\n");
+
     printf("Player's x coordinates: %f\n", game->player.x);
     printf("Player's y coordinates: %f\n", game->player.y);
     printf("Player's angle: %f\n", game->player.angle);
+    printf("Player's rd_fov: %f\n", game->player.rd_fov);
+    printf("Player's ws: %d\n", game->player.ws);
+    printf("Player's as: %d\n", game->player.ad);
 }

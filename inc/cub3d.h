@@ -81,14 +81,14 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	char	*file;
-	char	**file_arr;
-	char	**item_line;
+	char	*file; // unnecessary?
+	char	**file_arr; // unnecessary?
+	char	**item_line; // unnecessary?
 	t_texture	textures; // filled
 	t_color		floor; // filled
 	t_color		ceiling; // filled
-	int		*color_arr;
-	char		**map_cpy;
+	int		*color_arr; // ??
+	char		**map_cpy; // filled
 	unsigned int	max_y;
 	unsigned int	max_x;
 	unsigned int	*x_row;;
@@ -100,20 +100,20 @@ typedef struct s_player
 {
 	t_valid_chars	orientation; // filled
 	double		angle; // filled
-	double		rd_fov;
+	double		rd_fov; // filled
 	double		x; // filled
 	double		y; // fillled
-	int			ws;
-	int			ad;
-	int			rotate;
+	int			ws; // filled with 0
+	int			ad; // filled with 0
+	int			rotate; // ??
 
 }	t_player;
 
 typedef struct s_game
 {
-	t_map		*map; // needs allocation
+	t_map		*map;
 	t_player	player;
-	t_texture	textures;
+	t_texture	textures; // ??
 	t_ray		ray;
 	mlx_t		*mlx;
 	mlx_image_t	*pixel;

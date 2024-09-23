@@ -17,6 +17,11 @@ void    init_player(t_game *game)
 {
     // should include rest of init process
     game->player.angle = get_player_angle(game);
+    game->player.x = game->player.x * TILESIZE + TILESIZE / 2;
+    game->player.y = game->player.y * TILESIZE + TILESIZE / 2;
+    game->player.rd_fov = (FOV * M_PI) / 180;
+    game->player.ws = 0;
+    game->player.ad = 0;
 }
 
 void    find_player(t_game *game, char **map)
