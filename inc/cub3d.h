@@ -81,19 +81,10 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	char	*file; // unnecessary?
-	char	**file_arr; // unnecessary?
-	char	**item_line; // unnecessary?
 	t_texture	textures; // filled
 	t_color		floor; // filled
 	t_color		ceiling; // filled
-	int		*color_arr; // ??
 	char		**map_cpy; // filled
-	unsigned int	max_y;
-	unsigned int	max_x;
-	unsigned int	*x_row;;
-	mlx_image_t	*map_img;	
-
 }	t_map;
 
 typedef struct s_player
@@ -162,21 +153,6 @@ void    get_textures(t_game *game, char **textures);
 void 	load_textures(t_game *game);
 void 	load_colors(t_game *game, char **colors);
 void	load_map(t_game *game, char **map, int num_lines);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
