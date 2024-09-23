@@ -1,16 +1,16 @@
-#include "../../inc/cub3d.h"
-#include <stdio.h>
+# include "../../inc/cub3d.h"
+#include <stdlib.h>
 
-// IsFull = false;
+// IsFull = True;
 
-static void	validate_colors(char **cpy_lines)
+static void	validate_colors(t_game *game, char **cpy_lines)
 {
 	char	**colors;
 	int		i;
 	int		j;
 
 	i = -1;
-	colors = malloc(sizeof(char *) * 3);
+	colors = malloc(sizeof(char *) * NUM_OF_RGB_VALUES);
 	if (colors == NULL)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
@@ -20,28 +20,40 @@ static void	validate_colors(char **cpy_lines)
 	while (cpy_lines[++i] != NULL)
 	{
 		if (ft_strncmp(cpy_lines[i], "F", 1) == 0 || ft_strncmp(cpy_lines[i], "C", 1) == 0)
-			colors[j++] = ft_strdup(cpy_lines[i]);
+        {
+            colors[j] = ft_strdup(cpy_lines[i]);
+            if (colors[j] == NULL)
+            {
+                perror("ft_strdup failed");
+                while (j > 0)
+                    free(colors[--j]);
+                free(colors);
+                exit(EXIT_FAILURE);
+            }
+            j++;
+        }
 	}
 	colors[j] = NULL;
-	if (ft_size_2d_arr((void **)colors) == 2 && is_valid_colors(colors) && is_colors_diff(colors))
+	if (ft_size_2d_arr((void **)colors) == 2 \
+            && is_valid_colors(colors) && is_colors_diff(colors))
 	{
-		// filling colors struct here
-		ft_putstr_fd("printing colors: \n", 1);
-		ft_put2d_char(colors);
+        load_colors(game, colors);
+        ft_free_2d_char(colors);
 	}
 	else
 	{
 		ft_putstr_fd("Error detected in map\n", 2);
+	    ft_free_2d_char(colors);
 		exit(EXIT_FAILURE);
 	}
-	ft_free_2d_char(colors);
 }
 
-static void	validate_textures(char **cpy_lines)
+static void	validate_textures(t_game *game, char **cpy_lines)
 {
 	char	**textures;
 	int		i;
 	int		j;
+    (void)game;
 
 	i = -1;
 	if (cpy_lines == NULL)
@@ -49,7 +61,7 @@ static void	validate_textures(char **cpy_lines)
 		ft_putstr_fd("Empty 2D array\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	textures = malloc(sizeof(char *) * 5);
+	textures = malloc(sizeof(char *) * (NUM_OF_TEXTURES + 1));
 	if (textures == NULL)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
@@ -63,7 +75,16 @@ static void	validate_textures(char **cpy_lines)
 				|| ft_strncmp(cpy_lines[i], "EA", 2) == 0\
 				|| ft_strncmp(cpy_lines[i], "WE", 2) == 0)
 		{
-			textures[j++] = ft_strdup(cpy_lines[i]);			
+			textures[j] = ft_strdup(cpy_lines[i]);			
+            if (textures[j] == NULL)
+            {
+                perror("ft_strdup failed");
+                while (j > 0)
+                    free(textures[--j]);
+                free(textures);
+                exit(EXIT_FAILURE);
+            }
+            j++;
 		}
 	}
 	textures[j] = NULL;
@@ -71,31 +92,32 @@ static void	validate_textures(char **cpy_lines)
 			&& is_textures_diff(textures)
 			&& is_textures_formats(textures))
 	{
-		// filling the struct t_texture here
-		printf("printing textures: \n");
-		ft_put2d_char(textures);
+        get_textures(game, textures);
+        load_textures(game);
+		//ft_put2d_char(textures);
 	}
 	else
 	{
-	
 		ft_putstr_fd("Error detected in map!\n", 2);
+	    ft_free_2d_char(textures);
 		exit(EXIT_FAILURE);
 	}
 	ft_free_2d_char(textures);
 }
 
-void	parse_textures_colors(char **lines /*, t_game *game*/)
+void	parse_textures_colors(char **lines , t_game *game)
 {
 	char	**cpy_lines;
 
 	cpy_lines = lines;
 	cpy_lines = ft_remove_empyt_lines(cpy_lines);	
-	validate_textures(cpy_lines);
-	validate_colors(cpy_lines);
+    if (cpy_lines == NULL) exit(EXIT_FAILURE);
+	validate_textures(game, cpy_lines);
+	validate_colors(game, cpy_lines);
 	ft_free_2d_char(cpy_lines);
 }
 
-void	parse_map(char **arr)
+void	parse_map(t_game *game, char **arr)
 {
 	int		i;
 	int		j;
@@ -105,29 +127,41 @@ void	parse_map(char **arr)
 
 	i = 5;
 	j = 0;
-	lines = ft_remove_empyt_lines(arr);
+	lines = ft_remove_empyt_lines(arr); // what happens to arr ??
 	num_lines = ft_size_2d_arr((void **)(lines + 6));
 	map = malloc(sizeof(char *) * (num_lines + 1));
 	if (map == NULL)
 		exit(EXIT_FAILURE);
 	while (lines[++i] != NULL)
-		map[j++] = ft_strdup(lines[i]);
+    {
+		map[j] = ft_strdup(lines[i]);
+        if (map[j] == NULL)
+        {
+            while (j > 0)
+                free(map[--j]);
+            free(map);
+            ft_free_2d_char(lines);
+            exit(EXIT_FAILURE);
+        }
+        j++;
+    }
 	map[j] = NULL;
-	//printf("num of lines : %d\n", num_lines);
 	if (is_map_valid(map, num_lines))
 	{
-		ft_putstr_fd("Wow, I love nvim config\n", 1);
-		printf("Printing the map: \n");
-		ft_put2d_char(map);
+        game->map->map_cpy = malloc(sizeof(char *) * (num_lines + 1));
+        if (game->map->map_cpy == NULL)
+            exit(EXIT_FAILURE);
+        load_map(game, map, num_lines);
 	}
+    ft_free_2d_char(map);
+    ft_free_2d_char(lines);
 }
 
-void	parser(__attribute__((unused)) int ac, char **av)
+void	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 {
 	int		fd;
 	char	**lines;
 	
-	// ft_memset(game, 0, sizeof(t_game));
 	if (check_file_format(av[1], "cub"))
 	{
 		fd = open(av[1], O_RDONLY);
@@ -137,9 +171,11 @@ void	parser(__attribute__((unused)) int ac, char **av)
 			exit(EXIT_FAILURE);
 		}
 		lines = extract_lines(fd, av[1]);
-		parse_textures_colors(lines);
-		parse_map(lines);
-		ft_free_2d_char(lines);
+        if (lines == NULL)
+            exit(EXIT_FAILURE);
+		parse_textures_colors(lines, game);
+		parse_map(game, lines);
+        ft_free_2d_char(lines);
 		close(fd);
 	}
 	else

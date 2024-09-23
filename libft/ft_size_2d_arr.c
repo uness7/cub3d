@@ -19,7 +19,7 @@ int	ft_size_2d_arr(void **arr)
 	i = 0;
 	if (arr == NULL)
 	{
-		ft_putstr_fd("Empty 2d array\n", 2);
+		ft_putstr_fd("Empty 2d array ft_size_2d_arr\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	while (arr[i] != NULL)

@@ -2,7 +2,7 @@
 
 // IsFull = true;
 
-static char	*get_file_extension(const char *file_path)
+static char *get_file_extension(const char *file_path)
 {
 	char	*dot;
 
@@ -53,17 +53,32 @@ char	**extract_lines(int fd, char *av)
 	char	**lines;
 
 	num_lines = count_lines(av);
+    if (num_lines == 0)
+    {
+        ft_putstr_fd("Empty map!\n", 2);
+        return (NULL);
+    }
 	lines = malloc(sizeof(char *) * (num_lines + 1));
 	if (lines == NULL)
 	{
-		printf("malloc failed\n");
+		ft_putstr_fd("malloc failed\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		lines[i] = ft_strdup(line);
-		free(line);
+        if (lines[i] == NULL)
+        {
+            ft_putstr_fd("ft_strdup failed\n", 2);
+            while (i > 0)
+                free(lines[--i]);
+            free(lines);
+            free(line);
+            close(fd);
+            exit(EXIT_FAILURE);
+        }
+        free(line);
 		i++;
 	}
 	lines[i] = NULL;
@@ -84,6 +99,12 @@ char	**ft_remove_empyt_lines(char **cpy_lines)
 		exit(EXIT_FAILURE);
 	}
 	num_lines = ft_size_2d_arr((void **)cpy_lines);
+    if (num_lines == 0)
+    {
+        ft_putstr_fd("Empty lines detected\n", 2);
+        exit(EXIT_FAILURE);
+    }
+    //printf("num of lines : %d\n", num_lines);
 	result = malloc(sizeof(char *) * (num_lines + 1));
 	if (result == NULL)
 	{
@@ -100,6 +121,9 @@ char	**ft_remove_empyt_lines(char **cpy_lines)
 			if (result[j] == NULL)
 			{
 				ft_putstr_fd("ft_strdup failed\n", 2);
+                while (j > 0)
+                    free(result[--j]);
+                free(result);
 				exit(EXIT_FAILURE);
 			}
 			j++;

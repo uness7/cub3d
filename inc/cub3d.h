@@ -26,6 +26,8 @@
 # define TRANSPARENT 0x00000000
 # define MMAP_PLAYER 0xFF0000FF
 
+# define NUM_OF_RGB_VALUES 3 /* used to allocate memory */
+# define NUM_OF_TEXTURES 4
 
 typedef enum e_valid_chars
 {
@@ -82,9 +84,9 @@ typedef struct s_map
 	char	*file;
 	char	**file_arr;
 	char	**item_line;
-	t_texture	textures;
-	t_color		floor;
-	t_color		ceiling;
+	t_texture	textures; // filled
+	t_color		floor; // filled
+	t_color		ceiling; // filled
 	int		*color_arr;
 	char		**map_cpy;
 	unsigned int	max_y;
@@ -109,7 +111,7 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	t_map		*map;
+	t_map		*map; // needs allocation
 	t_player	player;
 	t_texture	textures;
 	t_ray		ray;
@@ -122,8 +124,8 @@ typedef struct s_game
 /* ------ Functions Prototype -------- */
 
 /* ---- src/parser/ ---- */
-void	parser(int ac, char **av);
-void    parse_textures_colors(char **lines /*, t_game *game*/);
+void	parser(int ac, char **av, t_game *game);
+void    parse_textures_colors(char **lines , t_game *game);
 
 /* ---- src/utils/ ---- */
 bool	check_file_format(const char *file_path, char *format);
@@ -147,7 +149,16 @@ int			count_lines(char *filename);
 char	**extract_lines(int fd, char *av);
 char	**ft_remove_empyt_lines(char **cpy_lines);
 
-
+/* Initialization */
+/* src/init */
+void 	allocate_memory_for_game(t_game **game);
+void	print_game_data(t_game *game);
+void    get_colors(t_game *game, char *rgb, char *space);
+void    init_colors(t_game *game, t_color colors, char *space);
+void    get_textures(t_game *game, char **textures);
+void 	load_textures(t_game *game);
+void 	load_colors(t_game *game, char **colors);
+void	load_map(t_game *game, char **map, int num_lines);
 
 
 

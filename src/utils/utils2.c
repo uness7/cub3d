@@ -1,4 +1,5 @@
 # include "../../inc/cub3d.h"
+#include <stdio.h>
 
 // IsFull = true;
 
