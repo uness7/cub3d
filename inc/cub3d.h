@@ -98,11 +98,11 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_valid_chars	orientation;
-	double		angle;
+	t_valid_chars	orientation; // filled
+	double		angle; // filled
 	double		rd_fov;
-	double		x;
-	double		y;
+	double		x; // filled
+	double		y; // fillled
 	int			ws;
 	int			ad;
 	int			rotate;
@@ -126,6 +126,9 @@ typedef struct s_game
 /* ---- src/parser/ ---- */
 void	parser(int ac, char **av, t_game *game);
 void    parse_textures_colors(char **lines , t_game *game);
+void    find_player(t_game *game, char **map);
+double  get_player_angle(t_game *game);
+void	init_player(t_game *game);
 
 /* ---- src/utils/ ---- */
 bool	check_file_format(const char *file_path, char *format);

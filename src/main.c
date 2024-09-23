@@ -26,8 +26,11 @@ int	main(int ac, char **av)
 	if (ac == 2)
     {
 		parser(ac, av, game);
+        init_player(game);
         if (game != NULL)
             print_game_data(game);
+
+        // game struct contains data needed to run the program
     }
 	else
 		ft_putstr_fd("You need to add a map :(\n", 2);

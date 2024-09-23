@@ -49,4 +49,11 @@ void    print_game_data(t_game *game)
     /* Printing cpy_map */
     if (game->map->map_cpy != NULL)
         ft_put2d_char(game->map->map_cpy);
+
+    printf("\n");
+
+    /* Printing the player's coordinates */
+    printf("Player's x coordinates: %f\n", game->player.x);
+    printf("Player's y coordinates: %f\n", game->player.y);
+    printf("Player's angle: %f\n", game->player.angle);
 }

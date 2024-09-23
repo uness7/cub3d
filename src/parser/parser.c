@@ -94,7 +94,6 @@ static void	validate_textures(t_game *game, char **cpy_lines)
 	{
         get_textures(game, textures);
         load_textures(game);
-		//ft_put2d_char(textures);
 	}
 	else
 	{
@@ -151,6 +150,7 @@ void	parse_map(t_game *game, char **arr)
         game->map->map_cpy = malloc(sizeof(char *) * (num_lines + 1));
         if (game->map->map_cpy == NULL)
             exit(EXIT_FAILURE);
+        find_player(game, map);
         load_map(game, map, num_lines);
 	}
     ft_free_2d_char(map);
