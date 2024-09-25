@@ -21,10 +21,7 @@
 # define TILESIZE 40
 # define ROTSPEED 20
 # define MOVESPEED 3
-# define MMAP_WALL 0x000000FF
-# define MMAP_SPACE 0xFFFFFFFF
 # define TRANSPARENT 0x00000000
-# define MMAP_PLAYER 0xFF0000FF
 
 # define NUM_OF_RGB_VALUES 3 /* used to allocate memory */
 # define NUM_OF_TEXTURES 4
