@@ -15,7 +15,6 @@ double  get_player_angle(t_game *game)
 
 void    init_player(t_game *game)
 {
-    // should include rest of init process
     game->player.angle = get_player_angle(game);
     game->player.x = game->player.x * TILESIZE + TILESIZE / 2;
     game->player.y = game->player.y * TILESIZE + TILESIZE / 2;
@@ -37,12 +36,13 @@ void    find_player(t_game *game, char **map)
         len = ft_strlen(map[i]);
         while (j < len - 1)
         {
-            if (map[i][j] == NORTH || map[i][j] == SOUTH || map[i][j] == EAST || map[i][j] == WEST)
+            if (map[i][j] == NORTH || map[i][j] == SOUTH || \
+                    map[i][j] == EAST || map[i][j] == WEST)
             {
                 game->player.orientation = map[i][j];
                 game->player.x = i;
                 game->player.y = j;
-                printf("player.x = %f\n", game->player.x);
+                //printf("player.x = %f\n", game->player.x);
             }
             j++;
         }

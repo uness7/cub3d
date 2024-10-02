@@ -85,19 +85,54 @@ void    get_textures(t_game *game, char **textures)
     }
 }
 
+void    ft_malloc_err(void)
+{
+    ft_putstr_fd("malloc_failed", 2);
+    exit(EXIT_FAILURE);
+}
+
 void    load_textures(t_game *game)
 {
-    if (!game->map->textures.north)
+    if (game->map->textures.north != NULL)
+    {
         game->map->textures.north_tx = mlx_load_png(game->map->textures.north);
+        if (!game->map->textures.north_tx)
+            ft_malloc_err();
+    }
+    else {
+        printf("tried to load textures but failed\n");
+    }
 
-    if (!game->map->textures.south)
+    if (game->map->textures.south != NULL)
+    {
         game->map->textures.south_tx = mlx_load_png(game->map->textures.south);
+        if (!game->map->textures.south_tx)
+            ft_malloc_err();
+    }
+    else {
+        printf("tried to load textures but failed\n");
+    }
 
-    if (!game->map->textures.east)
+    if (game->map->textures.east != NULL)
+    {
         game->map->textures.east_tx = mlx_load_png(game->map->textures.east);
+        if (!game->map->textures.east_tx)
+            ft_malloc_err();
+    }
+    else {
+        printf("tried to load textures but failed\n");
+    }
 
-    if (!game->map->textures.west)
+
+    if (game->map->textures.west != NULL)
+    {
         game->map->textures.west_tx = mlx_load_png(game->map->textures.west);
+        if (!game->map->textures.west_tx)
+            ft_malloc_err();
+    }
+    else {
+        printf("tried to load textures but failed\n");
+    }
 }
 
 

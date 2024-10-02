@@ -14,8 +14,8 @@
 
 # define MAP_WIDTH 24
 # define MAP_HEIGHT 24
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 1200 
+# define SCREEN_WIDTH 1200
+# define SCREEN_HEIGHT 800 
 # define NUM_TEXTURES 2
 # define FOV 60
 # define TILESIZE 40
@@ -82,6 +82,9 @@ typedef struct s_map
 	t_color		floor; // filled
 	t_color		ceiling; // filled
 	char		**map_cpy; // filled
+	unsigned int		*x_row;
+	unsigned int		max_x;
+	unsigned int 		max_y;
 }	t_map;
 
 typedef struct s_player
@@ -151,6 +154,39 @@ void 	load_textures(t_game *game);
 void 	load_colors(t_game *game, char **colors);
 void	load_map(t_game *game, char **map, int num_lines);
 
+
+/* RAYCASTING */
+void			init_window(t_game *game);
+void			init_player(t_game *game);
+double			get_p_angle(t_game *game);
+void			game_loop(void *gameptr);
+void			castrays(t_game *game);
+double			get_v_inter(t_game *game);
+double			get_h_inter(t_game *game);
+int				check_inter(
+					t_game *game, double *step, double *inter, t_orientation o);
+bool			check_hit(t_game *game, double x, double y);
+void			render_line(t_game *game, int ray);
+void			put_line(int t_pixel, int b_pixel, int ray, t_game *game);
+void			put_floor_sky(t_game *game, int ray, int top_p, int bottom_p);
+mlx_texture_t	*get_ray_texture(t_game *game);
+int				reverse_bytes(int c);
+double			get_x_o(t_game *game, int t_width);
+void			draw_player(t_game *game);
+void			draw_square(t_game *game, int map_x, int map_y, int color);
+void			terminate_game(void *gameptr);
+
+/* MOVEMENT */
+void			keypress(mlx_key_data_t keydata, void *gameptr);
+void			keyrelease(mlx_key_data_t keydata, t_game *game);
+void			player_controller(t_game *game);
+double			angle_reset(double angle);
+void			check_move(double new_x, double new_y, t_game *game);
+void			move_player(t_game *game, double new_x, double new_y);
+
+void    init_max_x(t_game *game);
+void    init_max_y(t_game *game);
+void    init_x_row(t_game *game);
 
 
 # endif
