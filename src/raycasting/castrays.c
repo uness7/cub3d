@@ -1,5 +1,4 @@
 # include "../../inc/cub3d.h"
-#include <stdio.h>
 
 void    init_x_row(t_game *game)
 {
@@ -22,7 +21,6 @@ void    init_x_row(t_game *game)
     }
 }
 
-/* max_y: how many rows are there in map? */
 void    init_max_y(t_game *game)
 {
     int     i;
@@ -33,7 +31,6 @@ void    init_max_y(t_game *game)
     game->map->max_y = i;
 }
 
-/* max_x: what's the longest row in map? */
 void    init_max_x(t_game *game)
 {
     int     i;

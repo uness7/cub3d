@@ -40,8 +40,8 @@ void    find_player(t_game *game, char **map)
                     map[i][j] == EAST || map[i][j] == WEST)
             {
                 game->player.orientation = map[i][j];
-                game->player.x = i;
-                game->player.y = j;
+                game->player.x = j;
+                game->player.y = i;
                 //printf("player.x = %f\n", game->player.x);
             }
             j++;
