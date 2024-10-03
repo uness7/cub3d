@@ -31,7 +31,6 @@ int	    main(int ac, char **av)
         init_max_y(game);
         init_x_row(game);
         init_window(game);
-        //print_game_data(game);
     }
 	else
 		ft_putstr_fd("You need to add a map :(\n", 2);
