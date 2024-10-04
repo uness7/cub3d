@@ -13,6 +13,7 @@ while [ -e "${MAP_PATH}${NBR}.cub" ]; do
 
     # Execute cub3D using valgrind to check possible leaks
     valgrind --leak-check=full ./Cub3D ${MAP_PATH}${NBR}.cub
+    #valgrind --leak-check=full --show-leak-kinds=all ./Cub3D ${MAP_PATH}${NBR}.cub
     #./Cub3D ${MAP_PATH}${NBR}.cub
 
     # Add two line jumps

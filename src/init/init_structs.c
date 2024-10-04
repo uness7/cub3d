@@ -1,8 +1,4 @@
 # include "../../inc/cub3d.h"
-#include <stdio.h>
-#include <stdlib.h>
-
-// IsFull = true;
 
 void    get_colors(t_game *game, char *rgb, char *space) 
 {
@@ -49,8 +45,8 @@ void    init_colors(t_game *game, t_color colors, char *space)
 
 void    get_textures(t_game *game, char **textures)
 {
-    int		i;
-    char	**split;
+    int         i;
+    char    **split;
 
     i = -1;
     while (textures[++i] != NULL)
@@ -65,23 +61,47 @@ void    get_textures(t_game *game, char **textures)
         if (ft_strncmp(split[0], "NO", 2) == 0)
         {
             game->map->textures.north = ft_strdup(split[1]);
-            // handle the case of ft_strdup failure
+            if (game->map->textures.north == NULL)
+            {
+                perror("ft_strdup failed");
+                ft_free_2d_char(split);
+                exit(EXIT_FAILURE);
+            }
         }
 
         if (ft_strncmp(split[0], "SO", 2) == 0)
         {
             game->map->textures.south = ft_strdup(split[1]);
+            if (game->map->textures.south == NULL)
+            {
+                perror("ft_strdup failed");
+                ft_free_2d_char(split);
+                exit(EXIT_FAILURE);
+            }
         }
 
         if (ft_strncmp(split[0], "EA", 2) == 0)
         {
             game->map->textures.east = ft_strdup(split[1]);
+            if (game->map->textures.east == NULL)
+            {
+                perror("ft_strdup failed");
+                ft_free_2d_char(split);
+                exit(EXIT_FAILURE);
+            }
         }
 
         if (ft_strncmp(split[0], "WE", 2) == 0)
         {
             game->map->textures.west = ft_strdup(split[1]);
+            if (game->map->textures.west == NULL)
+            {
+                perror("ft_strdup failed");
+                ft_free_2d_char(split);
+                exit(EXIT_FAILURE);
+            }
         }
+        ft_free_2d_char(split);
     }
 }
 

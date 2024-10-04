@@ -42,7 +42,6 @@ void    find_player(t_game *game, char **map)
                 game->player.orientation = map[i][j];
                 game->player.x = j;
                 game->player.y = i;
-                //printf("player.x = %f\n", game->player.x);
             }
             j++;
         }

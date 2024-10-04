@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
-#include <stdio.h>
 
 void	terminate_game(void *game)
 {

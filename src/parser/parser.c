@@ -1,9 +1,6 @@
 # include "../../inc/cub3d.h"
-#include <stdlib.h>
 
-// IsFull = True;
-
-static void	validate_colors(t_game *game, char **cpy_lines)
+static void validate_colors(t_game *game, char **cpy_lines)
 {
 	char	**colors;
 	int		i;
@@ -53,7 +50,6 @@ static void	validate_textures(t_game *game, char **cpy_lines)
 	char	**textures;
 	int		i;
 	int		j;
-    (void)game;
 
 	i = -1;
 	if (cpy_lines == NULL)
@@ -157,7 +153,7 @@ void	parse_map(t_game *game, char **arr)
     ft_free_2d_char(lines);
 }
 
-void	parser(__attribute__((unused)) int ac, char **av, t_game *game)
+int parser(__attribute__((unused)) int ac, char **av, t_game *game)
 {
 	int		fd;
 	char	**lines;
@@ -168,16 +164,20 @@ void	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 		if (fd < 0)
 		{
 			ft_putstr_fd("open failed. \n", 2);
-			exit(EXIT_FAILURE);
+            return (-1);
 		}
 		lines = extract_lines(fd, av[1]);
         if (lines == NULL)
-            exit(EXIT_FAILURE);
+            return (-1);
 		parse_textures_colors(lines, game);
 		parse_map(game, lines);
         ft_free_2d_char(lines);
 		close(fd);
 	}
 	else
+    {
 		ft_putstr_fd("bad format\n", 2);
+        return (-1);;
+    }
+    return (0);
 }

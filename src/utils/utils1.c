@@ -24,16 +24,16 @@ bool	check_file_format(const char *file_path, char *format)
 
 int	count_lines(char *filename)
 {
-	int		fd;
+	int     fd;
 	int		num_lines;
-	char	*line;
+	char    *line;
 
 	num_lines = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		perror("open failed");
-		exit(EXIT_FAILURE);
+        return (-1);
 	}
 	while ((line = get_next_line(fd)) != NULL) // I'm not allowed to do this
 	{
@@ -53,7 +53,7 @@ char	**extract_lines(int fd, char *av)
 	char	**lines;
 
 	num_lines = count_lines(av);
-    if (num_lines == 0)
+    if (num_lines == 0 || num_lines == -1)
     {
         ft_putstr_fd("Empty map!\n", 2);
         return (NULL);

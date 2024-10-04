@@ -9,6 +9,7 @@
 # include <fcntl.h>
 
 
+
 # include "../libft/libft.h"
 # include "../mlx/include/MLX42/MLX42.h"
 
@@ -23,7 +24,7 @@
 # define MOVESPEED 3
 # define TRANSPARENT 0x00000000
 
-# define NUM_OF_RGB_VALUES 3 /* used to allocate memory */
+# define NUM_OF_RGB_VALUES 3
 # define NUM_OF_TEXTURES 4
 
 typedef enum e_valid_chars
@@ -104,7 +105,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_player	player;
-	t_texture	textures; // ??
+	// t_texture	textures; // ??
 	t_ray		ray;
 	mlx_t		*mlx;
 	mlx_image_t	*pixel;
@@ -115,7 +116,7 @@ typedef struct s_game
 /* ------ Functions Prototype -------- */
 
 /* ---- src/parser/ ---- */
-void	parser(int ac, char **av, t_game *game);
+int		parser(int ac, char **av, t_game *game);
 void    parse_textures_colors(char **lines , t_game *game);
 void    find_player(t_game *game, char **map);
 double  get_player_angle(t_game *game);
