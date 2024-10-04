@@ -73,22 +73,22 @@ void	put_line(int top_p, int bottom_p, int ray, t_game *game)
 	uint32_t		*pixels;
 
 	texture = get_ray_texture(game);
-    if (texture == NULL)
-    {
-        ft_putstr_fd("texture variable is empty\n", 2);
-        exit(1);
-    }
+	if (texture == NULL)
+	{
+		ft_putstr_fd("texture variable is empty\n", 2);
+		exit(1);
+	}
 	pixels = (uint32_t *)texture->pixels;
 	step = (double)texture->width / game->ray.wall_l;
 	x_o = get_x_o(game, texture->width);
-	y_o = (top_p - (SCREEN_HEIGHT/ 2) + (game->ray.wall_l / 2)) * step;
+	y_o = (top_p - (SCREEN_HEIGHT / 2) + (game->ray.wall_l / 2)) * step;
 	if (y_o < 0)
 		y_o = 0;
 	put_floor_sky(game, ray, top_p, bottom_p);
 	while (top_p < bottom_p)
 	{
-		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes(
-				pixels[(int)y_o * texture->width + (int)x_o]));
+		mlx_put_pixel(game->pixel, ray, top_p, reverse_bytes(pixels[(int)y_o
+				* texture->width + (int)x_o]));
 		y_o += step;
 		top_p++;
 	}
