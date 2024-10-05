@@ -3,7 +3,7 @@ BUILD = build
 SRCS = $(shell find $(S) -name "*.c")
 OBJS = $(patsubst $(S)/%.c,$(BUILD)/%.o,$(SRCS))
 CC = cc
-FLAGS = -Wall -Wextra -Werror -Iinc -I./libft -Imlx -g
+FLAGS = -Wall -Wextra -Werror -Iinc -I./libft -Imlx -g3
 
 MLX_LIB = mlx/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBFT_DIR = ./libft

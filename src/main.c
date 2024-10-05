@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzioual <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/05 10:39:37 by yzioual           #+#    #+#             */
+/*   Updated: 2024/10/05 10:43:13 by yzioual          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	allocate_memory_for_game(t_game **game)
@@ -29,6 +41,7 @@ void	free_game(t_game *game)
 	mlx_delete_texture(game->map->textures.east_tx);
 	mlx_delete_texture(game->map->textures.west_tx);
 	ft_free_2d_char(game->map->map_cpy);
+	free(game->map->x_row);
 	free(game->map);
 	free(game);
 }

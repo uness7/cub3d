@@ -6,15 +6,21 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 10:59:40 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/03 11:03:00 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:38:08 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-void	terminate_game(void *game)
+void	terminate_game(void *ptr)
 {
-	(void)game;
+	t_game	*game;
+
+	game = (t_game *)ptr;
+	if (game->mlx->window)
+		mlx_close_window(game->mlx);
+	mlx_terminate(game->mlx);
+	free_game(game);
 	exit(1);
 }
 

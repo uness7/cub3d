@@ -189,5 +189,9 @@ void    init_max_x(t_game *game);
 void    init_max_y(t_game *game);
 void    init_x_row(t_game *game);
 
+/* Memory Management */
+void    free_game(t_game *game);
+
+
 
 # endif
