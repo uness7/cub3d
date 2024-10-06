@@ -8,13 +8,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-
-
 # include "../libft/libft.h"
 # include "../mlx/include/MLX42/MLX42.h"
 
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 24
 # define SCREEN_WIDTH 1200
 # define SCREEN_HEIGHT 800 
 # define NUM_TEXTURES 2
@@ -79,10 +75,10 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	t_texture	textures; // filled
-	t_color		floor; // filled
-	t_color		ceiling; // filled
-	char		**map_cpy; // filled
+	t_texture	textures;
+	t_color		floor; 
+	t_color		ceiling;
+	char		**map_cpy;
 	unsigned int		*x_row;
 	unsigned int		max_x;
 	unsigned int 		max_y;
@@ -90,22 +86,20 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_valid_chars	orientation; // filled
-	double		angle; // filled
-	double		rd_fov; // filled
-	double		x; // filled
-	double		y; // fillled
-	int			ws; // filled with 0
-	int			ad; // filled with 0
-	int			rotate; // ??
-
+	t_valid_chars	orientation;
+	double		angle;
+	double		rd_fov;
+	double		x;
+	double		y;
+	int			ws; 
+	int			ad;
+	int			rotate;
 }	t_player;
 
 typedef struct s_game
 {
 	t_map		*map;
 	t_player	player;
-	// t_texture	textures; // ??
 	t_ray		ray;
 	mlx_t		*mlx;
 	mlx_image_t	*pixel;
