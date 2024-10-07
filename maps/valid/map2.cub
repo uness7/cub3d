@@ -1,7 +1,7 @@
-NO ./textures/colors/color1.png
-SO ./textures/colors/color2.png
-EA ./textures/colors/color3.png
-WE ./textures/colors/color4.png
+NO ./textures/colors/cat1.png
+SO ./textures/colors/cat2.png
+EA ./textures/colors/cat3.png
+WE ./textures/colors/cat4.png
 C 255,0,255
 F 255,255,0
 

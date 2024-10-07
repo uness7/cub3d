@@ -1,8 +1,18 @@
 EA ./textures/wood.png
+
+
+
 F 220,100,0
+
 SO ./textures/mossy.png
+
 C 225,30,0
-WE ./textures/eagle.png
+
+
+WE ./textures/obsidian.png
+
+
+
 NO ./textures/greystone.png
 111     1111111111111111111111111
 101     1000000000110000000000001
