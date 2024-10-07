@@ -1,6 +1,6 @@
 NO ./textures/greystone.png
 SO ./textures/mossy.png
-WE ./textures/eagle.png
+WE ./textures/obsidian.png
 EA ./textures/wood.png
 F 255,255,250
 C 255,255,255
