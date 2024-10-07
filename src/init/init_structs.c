@@ -1,4 +1,5 @@
 #include "../../inc/cub3d.h"
+#include <stdio.h>
 
 void	get_colors(t_game *game, char *rgb, char *space)
 {
@@ -20,7 +21,7 @@ void	get_colors(t_game *game, char *rgb, char *space)
 	colors.r = ft_atoi(split[1]);
 	colors.g = ft_atoi(split[2]);
 	colors.b = ft_atoi(split[3]);
-	colors.rgb = (colors.r << 16) + (colors.g << 8) + colors.b;
+	colors.rgb = ((colors.r << 24) | (colors.g << 16) | (colors.b << 8) | (0xFF));
 	ft_free_2d_char(split);
 	init_colors(game, colors, space);
 }
