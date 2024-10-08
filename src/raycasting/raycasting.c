@@ -27,14 +27,10 @@ double	get_h_inter(t_game *game)
 	h_x = game->player.x + (h_y - game->player.y) / tan(game->ray.angle);
 	if ((game->ray.angle > M_PI / 2 && game->ray.angle < (3 * M_PI) / 2)
 		&& x_step > 0)
-	{
 		x_step *= -1;
-	}
 	else if ((game->ray.angle > (3 * M_PI) / 2 || game->ray.angle < M_PI / 2)
 		&& x_step < 0)
-	{
 		x_step *= -1;
-	}
 	while (!check_hit(game, h_x, h_y - pixel))
 	{
 		h_x += x_step;

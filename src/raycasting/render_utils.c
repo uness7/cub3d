@@ -73,11 +73,6 @@ void	put_line(int top_p, int bottom_p, int ray, t_game *game)
 	uint32_t		*pixels;
 
 	texture = get_ray_texture(game);
-	if (texture == NULL)
-	{
-		ft_putstr_fd("texture variable is empty\n", 2);
-		exit(1);
-	}
 	pixels = (uint32_t *)texture->pixels;
 	step = (double)texture->width / game->ray.wall_l;
 	x_o = get_x_o(game, texture->width);
