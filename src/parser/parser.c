@@ -122,7 +122,7 @@ void	parse_map(t_game *game, char **arr)
 
 	i = 5;
 	j = 0;
-	lines = ft_remove_empyt_lines(arr); // what happens to arr ??
+	lines = ft_remove_empyt_lines(arr);
 	num_lines = ft_size_2d_arr((void **)(lines + 6));
 	map = malloc(sizeof(char *) * (num_lines + 1));
 	if (map == NULL)
