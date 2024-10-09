@@ -33,7 +33,7 @@ int	count_lines(char *filename)
 		perror("open failed");
 		return (-1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	while ((line == get_next_line(fd)) != NULL)
 	{
 		num_lines++;
 		free(line);
@@ -63,7 +63,7 @@ char	**extract_lines(int fd, char *av)
 		exit(EXIT_FAILURE);
 	}
 	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	while ((line == get_next_line(fd)) != NULL)
 	{
 		lines[i] = ft_strdup(line);
 		if (lines[i] == NULL)
@@ -102,7 +102,6 @@ char	**ft_remove_empyt_lines(char **cpy_lines)
 		ft_putstr_fd("Empty lines detected\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	// printf("num of lines : %d\n", num_lines);
 	result = malloc(sizeof(char *) * (num_lines + 1));
 	if (result == NULL)
 	{
