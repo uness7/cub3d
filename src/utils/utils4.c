@@ -34,7 +34,10 @@ bool	check_first_nd_last_char(char **map, int rows)
 
 bool	check_adjacent_to_spaces(char **map, int rows)
 {
-	int i, j, len;
+	int	i;
+	int	j;
+	int	len;
+
 	for (i = 0; i < rows; i++)
 	{
 		len = ft_strlen(map[i]);
@@ -60,7 +63,11 @@ bool	check_adjacent_to_spaces(char **map, int rows)
 
 bool	check_row_longer_than_top(char **map, int rows)
 {
-	int i, j, len_curr, len_top;
+	int	i;
+	int	j;
+	int	len_curr;
+	int	len_top;
+
 	for (i = 1; i < rows; i++)
 	{
 		len_curr = ft_strlen(map[i]);
@@ -87,7 +94,11 @@ bool	check_row_longer_than_top(char **map, int rows)
 
 bool	check_row_longer_than_bottom(char **map, int rows)
 {
-	int i, j, len_curr, len_bottom;
+	int	i;
+	int	j;
+	int	len_curr;
+	int	len_bottom;
+
 	for (i = 0; i < rows - 1; i++)
 	{
 		len_curr = ft_strlen(map[i]);
