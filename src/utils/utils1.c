@@ -33,14 +33,26 @@ int	count_lines(char *filename)
 		perror("open failed");
 		return (-1);
 	}
-	while ((line == get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
+		line = get_next_line(fd);
 		num_lines++;
 		free(line);
 	}
 	free(line);
 	close(fd);
 	return (num_lines);
+}
+
+void	copy_line(char **dest, char *line)
+{
+	*dest = ft_strdup(line);
+	if (*dest == NULL)
+	{
+		ft_putstr_fd("Error: memory allocation failed. \n", 2);
+		exit(EXIT_FAILURE);
+	}
 }
 
 char	**extract_lines(int fd, char *av)
@@ -51,39 +63,27 @@ char	**extract_lines(int fd, char *av)
 	char	**lines;
 
 	num_lines = count_lines(av);
-	if (num_lines == 0 || num_lines == -1)
+	lines = malloc(sizeof(char *) * (num_lines + 1));
+	if (num_lines == 0 || num_lines == -1 || lines == NULL)
 	{
-		ft_putstr_fd("Empty map!\n", 2);
+		ft_putstr_fd("Empty map or allocation memory has failed!\n", 2);
 		return (NULL);
 	}
-	lines = malloc(sizeof(char *) * (num_lines + 1));
-	if (lines == NULL)
-	{
-		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
-	}
 	i = 0;
-	while ((line == get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		lines[i] = ft_strdup(line);
-		if (lines[i] == NULL)
-		{
-			ft_putstr_fd("ft_strdup failed\n", 2);
-			while (i > 0)
-				free(lines[--i]);
-			free(lines);
-			free(line);
-			close(fd);
-			exit(EXIT_FAILURE);
-		}
+		copy_line(&lines[i], line);
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
 	lines[i] = NULL;
 	close(fd);
 	return (lines);
 }
 
+/*
 char	**ft_remove_empyt_lines(char **cpy_lines)
 {
 	int		i;
@@ -130,3 +130,4 @@ char	**ft_remove_empyt_lines(char **cpy_lines)
 	result[j] = NULL;
 	return (result);
 }
+*/

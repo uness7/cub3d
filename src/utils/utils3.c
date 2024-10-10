@@ -5,11 +5,11 @@ bool	is_composed_of_valid_chars(char **map)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (map[i] != NULL)
+	i = -1;
+	while (map[++i] != NULL)
 	{
-		j = 0;
-		while (map[i][j] != '\0')
+		j = -1;
+		while (map[i][++j] != '\0')
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
 				&& map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E'
@@ -18,9 +18,7 @@ bool	is_composed_of_valid_chars(char **map)
 				ft_putstr_fd("Map is composed of multi valid chars\n", 2);
 				return (false);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (true);
 }
@@ -44,10 +42,7 @@ bool	check_first_nd_last_rows(char **map, int rows)
 			while (j <= len - 1)
 			{
 				if (map[i][j] != '1' && map[i][j] != ' ' && map[i][j] != '\n')
-				{
-					printf("Map failed rule 2\n");
 					return (false);
-				}
 				j++;
 			}
 		}
@@ -78,10 +73,7 @@ static bool	is_char_repeated(char **map, int rows)
 		}
 	}
 	if (counter == 0 || counter != 1)
-	{
-		printf("counter = %d\n", counter);
 		return (false);
-	}
 	return (true);
 }
 

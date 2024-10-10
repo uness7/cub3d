@@ -1,47 +1,62 @@
 #include "../../inc/cub3d.h"
 
-void	load_colors(t_game *game, char **colors)
+static void	exit_on_error(char *message)
 {
-	int	i;
-
-	i = 0;
-	while (colors[i] != NULL)
-	{
-		if (ft_strncmp(colors[i], "F", 1) == 0)
-			get_colors(game, colors[i], "floor");
-		else if (ft_strncmp(colors[i], "C", 1) == 0)
-			get_colors(game, colors[i], "ceiling");
-		else
-			ft_putstr_fd("Something went wrong\n", 2);
-		i++;
-	}
+	ft_putstr_fd(message, 2);
+	exit(EXIT_FAILURE);
 }
 
-bool	check_row_longer_than_bottom(char **map, int rows)
+static char	**allocate_result_array(int num_lines)
+{
+	char	**result;
+
+	result = malloc(sizeof(char *) * (num_lines + 1));
+	if (result == NULL)
+		exit_on_error("malloc failed\n");
+	return (result);
+}
+
+static void	free_result_on_error(char **result, int j)
+{
+	while (j > 0)
+		free(result[--j]);
+	free(result);
+}
+
+static void	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 {
 	int	i;
 	int	j;
-	int	len_curr;
-	int	len_bottom;
 
-	i = -1;
-	while (++i < rows - 1)
+	i = 0;
+	j = 0;
+	while (i < num_lines && cpy_lines[i] != NULL)
 	{
-		len_curr = ft_strlen(map[i]);
-		len_bottom = ft_strlen(map[i + 1]);
-		if (map[i][len_curr - 1] == '\n')
-			len_curr--;
-		if (map[i + 1][len_bottom - 1] == '\n')
-			len_bottom--;
-		if (len_curr > len_bottom)
+		if (ft_strncmp(cpy_lines[i], "\n", 1) != 0 && cpy_lines[i][0] != '\0')
 		{
-			j = len_bottom - 1;
-			while (++j < len_curr)
-				if (map[i][j] != '1' && map[i][j] != ' ')
-					return (false);
+			result[j] = ft_strdup(cpy_lines[i]);
+			if (result[j] == NULL)
+				free_result_on_error(result, j);
+			j++;
 		}
+		i++;
 	}
-	return (true);
+	result[j] = NULL;
+}
+
+char	**ft_remove_empty_lines(char **cpy_lines)
+{
+	int		num_lines;
+	char	**result;
+
+	if (cpy_lines == NULL)
+		exit_on_error("Empty arr\n");
+	num_lines = ft_size_2d_arr((void **)cpy_lines);
+	if (num_lines == 0)
+		exit_on_error("Empty lines detected\n");
+	result = allocate_result_array(num_lines);
+	copy_non_empty_lines(result, cpy_lines, num_lines);
+	return (result);
 }
 
 /*

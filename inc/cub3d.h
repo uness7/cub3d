@@ -115,6 +115,8 @@ void    parse_textures_colors(char **lines , t_game *game);
 void    find_player(t_game *game, char **map);
 double  get_player_angle(t_game *game);
 void	init_player(t_game *game);
+void    validate_colors(t_game *game, char **cpy_lines);
+void    parse_map(t_game *game, char **arr);
 
 /* ---- src/utils/ ---- */
 bool	check_file_format(const char *file_path, char *format);
@@ -122,6 +124,10 @@ bool	is_textures_diff(char **textures);
 bool	is_textures_formats(char **textures);
 bool	is_valid_colors(char **colors);
 bool	is_colors_diff(char **colors);
+char    **ft_remove_empty_lines(char **cpy_lines);
+void    validate_textures(t_game *game, char **cpy_lines);
+int     parser(__attribute__((unused)) int ac, char **av, t_game *game);
+
 
 /* Map Validation */
 bool	is_map_valid(char **map, int num_lines); // Checker Function
