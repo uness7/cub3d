@@ -29,13 +29,9 @@ void	get_colors(t_game *game, char *rgb, char *space)
 void	init_colors(t_game *game, t_color colors, char *space)
 {
 	if (ft_strncmp(space, "floor", 6) == 0)
-	{
 		game->map->floor = colors;
-	}
 	else if (ft_strncmp(space, "ceiling", 8) == 0)
-	{
 		game->map->ceiling = colors;
-	}
 	else
 	{
 		ft_putstr_fd("Expected floor or ceiling !\n", 2);
@@ -108,48 +104,23 @@ void	ft_malloc_err(void)
 	exit(EXIT_FAILURE);
 }
 
+static bool	is_null(mlx_texture_t *texture)
+{
+	if (texture == NULL)
+		return (false);
+	return (true);
+}
+
 void	load_textures(t_game *game)
 {
 	if (game->map->textures.north != NULL)
-	{
 		game->map->textures.north_tx = mlx_load_png(game->map->textures.north);
-		if (!game->map->textures.north_tx)
-			ft_malloc_err();
-	}
-	else
-	{
-		printf("tried to load textures but failed\n");
-	}
 	if (game->map->textures.south != NULL)
-	{
 		game->map->textures.south_tx = mlx_load_png(game->map->textures.south);
-		if (!game->map->textures.south_tx)
-			ft_malloc_err();
-	}
-	else
-	{
-		printf("tried to load textures but failed\n");
-	}
 	if (game->map->textures.east != NULL)
-	{
 		game->map->textures.east_tx = mlx_load_png(game->map->textures.east);
-		if (!game->map->textures.east_tx)
-			ft_malloc_err();
-	}
-	else
-	{
-		printf("tried to load textures but failed\n");
-	}
 	if (game->map->textures.west != NULL)
-	{
 		game->map->textures.west_tx = mlx_load_png(game->map->textures.west);
-		if (!game->map->textures.west_tx)
-			ft_malloc_err();
-	}
-	else
-	{
-		printf("tried to load textures but failed\n");
-	}
 }
 
 void	load_map(t_game *game, char **map, int num_lines)
