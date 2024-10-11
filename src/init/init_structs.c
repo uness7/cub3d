@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	get_colors(t_game *game, char *rgb, char *space)
 {
@@ -19,14 +19,15 @@ void	get_colors(t_game *game, char *rgb, char *space)
 
 	if (rgb == NULL)
 	{
-		ft_putstr_fd("rgb array in get_colors is NULL\n", 2);
+		ft_putstr_fd("Error: RGB array in get_colors is NULL\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	split = ft_split(rgb, ',');
 	if (!split || !split[0] || !split[1] || !split[2] || !split[3])
 	{
 		ft_free_2d_char(split);
-		ft_putstr_fd("Something wrong ft_split function\n", 2);
+		ft_putstr_fd("Error: something wrong ft_split function\n", 2);
+		free_game(game);
 		exit(EXIT_FAILURE);
 	}
 	colors.r = ft_atoi(split[1]);
@@ -46,7 +47,7 @@ void	init_colors(t_game *game, t_color colors, char *space)
 		game->map->ceiling = colors;
 	else
 	{
-		ft_putstr_fd("Expected floor or ceiling !\n", 2);
+		ft_putstr_fd("Error: expected floor or ceiling !\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -74,6 +75,7 @@ void	load_textures(t_game *game)
 			!is_null(game->map->textures.west_tx))
 	{
 		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
+		free_game(game);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -87,7 +89,10 @@ void	load_map(t_game *game, char **map, int num_lines)
 	{
 		game->map->map_cpy[i] = ft_strdup(map[i]);
 		if (game->map->map_cpy[i] == NULL)
+		{
+			free_game(game);
 			exit(EXIT_FAILURE);
+		}
 	}
 	game->map->map_cpy[i] = NULL;
 }

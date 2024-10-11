@@ -42,7 +42,7 @@ int	count_lines(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("open failed");
+		ft_putstr_fd("Error: open failed\n", 2);
 		return (-1);
 	}
 	line = get_next_line(fd);

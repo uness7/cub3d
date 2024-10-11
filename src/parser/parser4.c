@@ -35,7 +35,7 @@ int	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 		fd = open(av[1], O_RDONLY);
 		if (fd < 0)
 		{
-			ft_putstr_fd("open failed. \n", 2);
+			ft_putstr_fd("Error: open failed. \n", 2);
 			return (-1);
 		}
 		lines = extract_lines(fd, av[1]);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 bool	is_textures_diff(char **textures)
 {
@@ -76,7 +76,7 @@ bool	validate_rgb_values(char *rgb)
 	if (!split || !split[0] || !split[1] || !split[2])
 	{
 		ft_free_2d_char(split);
-		ft_putstr_fd("Something wrong with colors\n", 2);
+		ft_putstr_fd("Error: something wrong with colors\n", 2);
 		return (false);
 	}
 	r = ft_atoi(split[0]);
@@ -85,7 +85,7 @@ bool	validate_rgb_values(char *rgb)
 	ft_free_2d_char(split);
 	if ((r <= 255 && r >= 0) && (g <= 255 && g >= 0) && (b <= 255 && b >= 0))
 		return (true);
-	ft_putstr_fd("One or more RGB values is not valid\n", 2);
+	ft_putstr_fd("Error: one or more RGB values is not valid\n", 2);
 	return (false);
 }
 
@@ -102,13 +102,13 @@ bool	is_valid_colors(char **colors)
 		if (!split || !split[1])
 		{
 			ft_free_2d_char(split);
-			ft_putstr_fd("Something wrong with colors\n", 2);
+			ft_putstr_fd("Error: something wrong with colors\n", 2);
 			return (false);
 		}
 		rgb = split[1];
 		if (!validate_rgb_values(rgb))
 		{
-			ft_putstr_fd("RGB colors should be within 0 - 255\n", 2);
+			ft_putstr_fd("Error: RGB colors should be within 0 - 255\n", 2);
 			ft_free_2d_char(split);
 			return (false);
 		}
@@ -133,6 +133,6 @@ bool	is_colors_diff(char **colors)
 	}
 	if (counter == 2)
 		return (true);
-	ft_putstr_fd("Floor or Ceiling colors is not valid (maybe both)\n", 2);
+	ft_putstr_fd("Error: floor or Ceiling colors is not valid (maybe both)\n", 2);
 	return (false);
 }

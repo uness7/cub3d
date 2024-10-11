@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
 void	allocate_memory_for_game(t_game **game)
 {
@@ -32,14 +32,24 @@ void	allocate_memory_for_game(t_game **game)
 
 void	free_game(t_game *game)
 {
-	free(game->map->textures.north);
-	free(game->map->textures.south);
-	free(game->map->textures.east);
-	free(game->map->textures.west);
-	mlx_delete_texture(game->map->textures.north_tx);
-	mlx_delete_texture(game->map->textures.south_tx);
-	mlx_delete_texture(game->map->textures.east_tx);
-	mlx_delete_texture(game->map->textures.west_tx);
+	if (game->map->textures.north != NULL)
+		free(game->map->textures.north);
+	if (game->map->textures.south != NULL)
+		free(game->map->textures.south);
+	if (game->map->textures.east != NULL)
+		free(game->map->textures.east);
+	if (game->map->textures.west != NULL)
+		free(game->map->textures.west);
+
+	if (game->map->textures.north_tx != NULL)
+		mlx_delete_texture(game->map->textures.north_tx);
+	if (game->map->textures.south_tx != NULL)
+		mlx_delete_texture(game->map->textures.south_tx);
+	if (game->map->textures.east_tx != NULL)
+		mlx_delete_texture(game->map->textures.east_tx);
+	if (game->map->textures.west_tx != NULL)
+		mlx_delete_texture(game->map->textures.west_tx);
+
 	ft_free_2d_char(game->map->map_cpy);
 	free(game->map->x_row);
 	free(game->map);
