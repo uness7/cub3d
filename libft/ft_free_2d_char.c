@@ -19,8 +19,8 @@ void    ft_free_2d_char(char **arr)
     i = 0;
     if (arr == NULL)
     {
-        ft_putstr_fd("Empty 2d array ft_free_2d_char\n", 2);
-        exit(EXIT_FAILURE);
+        ft_putstr_fd("Empty 2d array ft_free_2d_char\n", 2);        
+        return ;        
     }
     while (arr[i] != NULL)
     {

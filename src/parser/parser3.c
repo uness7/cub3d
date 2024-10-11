@@ -33,14 +33,8 @@ static char	**copy_textures(char **cpy_lines)
 {
 	int		i;
 	int		j;
-	char	**textures;
+	char	**textures = malloc(sizeof(char *) * (NUM_OF_TEXTURES+1));
 
-	textures = malloc(sizeof(char *) * (NUM_OF_TEXTURES + 1));
-	if (textures == NULL)
-	{
-		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
-	}
 	i = -1;
 	j = 0;
 	while (cpy_lines[++i] != NULL)
@@ -51,7 +45,6 @@ static char	**copy_textures(char **cpy_lines)
 			j++;
 		}
 	}
-	textures[j] = NULL;
 	return (textures);
 }
 
@@ -65,7 +58,8 @@ void	validate_textures(t_game *game, char **cpy_lines)
 		exit(EXIT_FAILURE);
 	}
 	textures = copy_textures(cpy_lines);
-	if (ft_size_2d_arr((void **)textures) == 4 && is_textures_diff(textures)
+	if (ft_size_2d_arr((void **)textures) == 4 \
+		&& is_textures_diff(textures) \
 		&& is_textures_formats(textures))
 	{
 		get_textures(game, textures);
@@ -75,6 +69,7 @@ void	validate_textures(t_game *game, char **cpy_lines)
 	{
 		ft_putstr_fd("Error detected in map!\n", 2);
 		ft_free_2d_char(textures);
+		free_game(game);
 		exit(EXIT_FAILURE);
 	}
 	ft_free_2d_char(textures);

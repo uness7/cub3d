@@ -42,7 +42,7 @@ int	count_lines(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error: open failed\n", 2);
+		ft_putstr_fd("Error: open failed hi\n", 2);
 		return (-1);
 	}
 	line = get_next_line(fd);
@@ -52,22 +52,35 @@ int	count_lines(char *filename)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
 	close(fd);
 	return (num_lines);
 }
 
-void	copy_line(char **dest, char *line)
+int	copy_line(char **dest, char *line)
 {
 	*dest = ft_strdup(line);
 	if (*dest == NULL)
 	{
 		ft_putstr_fd("Error: memory allocation failed. \n", 2);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
+	return (0);
 }
 
-char	**extract_lines(int fd, char *av)
+static char	**allocate_memory_for_extract_lines(int num_lines)
+{
+	char	**lines;
+
+	lines = malloc(sizeof(char *) * (num_lines + 1));
+	if (lines == NULL)
+	{
+		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
+		return (NULL);
+	}
+	return (lines);
+}
+
+char	**extract_lines(int fd, char *av, t_game *game)
 {
 	int		i;
 	int		num_lines;
@@ -77,7 +90,7 @@ char	**extract_lines(int fd, char *av)
 	num_lines = count_lines(av);
 	if (num_lines == 0 || num_lines == -1)
 	{
-		ft_putstr_fd("Error: empty map or allocation memory has failed!\n", 2);
+		ft_putstr_fd("Error: empty map or allocation memory has failed!\n", 2);		
 		return (NULL);
 	}
 	lines = allocate_memory_for_extract_lines(num_lines);
@@ -85,7 +98,13 @@ char	**extract_lines(int fd, char *av)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		copy_line(&lines[i], line);
+		if (copy_line(&lines[i], line) == -1)
+		{
+			free(line);
+			ft_free_2d_char(lines);
+			free_game(game);
+			return (NULL);
+		}
 		free(line);
 		i++;
 		line = get_next_line(fd);

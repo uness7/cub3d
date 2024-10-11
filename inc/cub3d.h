@@ -140,12 +140,12 @@ bool	is_composed_of_valid_chars(char **map);              // Rule 1
 
 int							count_lines(char *filename);
 
-char						**extract_lines(int fd, char *av);
+char						**extract_lines(int fd, char *av, t_game *game);
 char						**ft_remove_empyt_lines(char **cpy_lines);
 
 /* Initialization */
 /* src/init */
-void						allocate_memory_for_game(t_game **game);
+t_game						*allocate_memory_for_game(void);
 void						print_game_data(t_game *game);
 void						get_colors(t_game *game, char *rgb, char *space);
 void						init_colors(t_game *game, t_color colors,
@@ -195,7 +195,7 @@ void						init_x_row(t_game *game);
 
 /* Memory Management */
 void						free_game(t_game *game);
-char						**allocate_memory_for_extract_lines(int num_lines);
+// char						**allocate_memory_for_extract_lines(int num_lines);
 
 
 

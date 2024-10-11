@@ -38,11 +38,11 @@ int	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 			ft_putstr_fd("Error: open failed. \n", 2);
 			return (-1);
 		}
-		lines = extract_lines(fd, av[1]);
+		lines = extract_lines(fd, av[1], game);
 		if (lines == NULL)
 			return (-1);
-		parse_textures_colors(lines, game);
-		parse_map(game, lines);
+		//parse_textures_colors(lines, game);
+		//parse_map(game, lines);
 		ft_free_2d_char(lines);
 		close(fd);
 	}

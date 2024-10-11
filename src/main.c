@@ -12,49 +12,64 @@
 
 #include "cub3d.h"
 
-void	allocate_memory_for_game(t_game **game)
+t_game	*allocate_memory_for_game(void)
 {
-	*game = malloc(sizeof(t_game));
-	if (*game == NULL)
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if (game == NULL)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
-	ft_memset(*game, 0, sizeof(t_game));
-	(*game)->map = malloc(sizeof(t_map));
-	if ((*game)->map == NULL)
+	ft_memset(game, 0, sizeof(t_game));
+	(game)->map = malloc(sizeof(t_map));
+	if ((game)->map == NULL)
 	{
 		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
+		free(game);
+		return (NULL);
 	}
-	ft_memset((*game)->map, 0, sizeof(t_map));
+	ft_memset((game)->map, 0, sizeof(t_map));
+	return (game);
 }
 
 void	free_game(t_game *game)
 {
-	if (game->map->textures.north != NULL)
-		free(game->map->textures.north);
-	if (game->map->textures.south != NULL)
-		free(game->map->textures.south);
-	if (game->map->textures.east != NULL)
-		free(game->map->textures.east);
-	if (game->map->textures.west != NULL)
-		free(game->map->textures.west);
+	if (game == NULL)
+		return;
 
-	if (game->map->textures.north_tx != NULL)
-		mlx_delete_texture(game->map->textures.north_tx);
-	if (game->map->textures.south_tx != NULL)
-		mlx_delete_texture(game->map->textures.south_tx);
-	if (game->map->textures.east_tx != NULL)
-		mlx_delete_texture(game->map->textures.east_tx);
-	if (game->map->textures.west_tx != NULL)
-		mlx_delete_texture(game->map->textures.west_tx);
+	if (game->map != NULL)
+	{
+		if (game->map->textures.north != NULL)
+			free(game->map->textures.north);
+		if (game->map->textures.south != NULL)
+			free(game->map->textures.south);
+		if (game->map->textures.east != NULL)
+			free(game->map->textures.east);
+		if (game->map->textures.west != NULL)
+			free(game->map->textures.west);
 
-	ft_free_2d_char(game->map->map_cpy);
-	free(game->map->x_row);
-	free(game->map);
+		if (game->map->textures.north_tx != NULL)
+			mlx_delete_texture(game->map->textures.north_tx);
+		if (game->map->textures.south_tx != NULL)
+			mlx_delete_texture(game->map->textures.south_tx);
+		if (game->map->textures.east_tx != NULL)
+			mlx_delete_texture(game->map->textures.east_tx);
+		if (game->map->textures.west_tx != NULL)
+			mlx_delete_texture(game->map->textures.west_tx);
+
+		if (game->map->map_cpy != NULL)
+			ft_free_2d_char(game->map->map_cpy);
+		if (game->map->x_row != NULL)
+			free(game->map->x_row);
+
+		free(game->map);
+	}
+
 	free(game);
 }
+
 
 int	main(int ac, char **av)
 {
@@ -62,18 +77,13 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		allocate_memory_for_game(&game);
-		if (parser(ac, av, game) != 0)
+		game = allocate_memory_for_game();
+		if (parser(ac, av, game) == -1) // parser returns -1 in failure
 		{
-			free(game->map);
-			free(game);
+			free_game(game);
 			return (EXIT_FAILURE);
-		}
-		init_max_x(game);
-		init_max_y(game);
-		init_x_row(game);
-		init_window(game);
-		free_game(game);
+		}		
+		free_game(game);		
 	}
 	else
 		ft_putstr_fd("You need to add a map. \n", 2);

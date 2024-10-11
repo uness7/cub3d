@@ -12,15 +12,4 @@
 
 #include "cub3d.h"
 
-char	**allocate_memory_for_extract_lines(int num_lines)
-{
-	char	**lines;
 
-	lines = malloc(sizeof(char *) * (num_lines + 1));
-	if (lines == NULL)
-	{
-		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
-		exit(EXIT_FAILURE);
-	}
-	return (lines);
-}
