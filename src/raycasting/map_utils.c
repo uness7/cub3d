@@ -6,11 +6,11 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:42:47 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/03 11:42:48 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/11 10:39:40 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	init_x_row(t_game *game)
 {
@@ -51,6 +51,11 @@ void	init_max_x(t_game *game)
 	i = 0;
 	len = 0;
 	game->map->max_x = 0;
+	if (game->map->map_cpy == NULL)
+	{
+		ft_putstr_fd("Error: error in map is detected. \n", 2);
+		exit(EXIT_FAILURE);
+	}
 	while (game->map->map_cpy[i] != NULL)
 	{
 		len = ft_strlen(game->map->map_cpy[i]);
