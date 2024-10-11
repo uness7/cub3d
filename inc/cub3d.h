@@ -191,7 +191,6 @@ void    init_x_row(t_game *game);
 
 /* Memory Management */
 void    free_game(t_game *game);
-
-
+char	**allocate_memory_for_extract_lines(int num_lines);
 
 # endif

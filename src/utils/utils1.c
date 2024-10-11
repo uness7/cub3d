@@ -6,7 +6,7 @@
 /*   By: yzioual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 12:37:45 by yzioual           #+#    #+#             */
-/*   Updated: 2024/10/10 12:37:52 by yzioual          ###   ########.fr       */
+/*   Updated: 2024/10/11 10:01:34 by tblot-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	count_lines(char *filename)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		line = get_next_line(fd);
 		num_lines++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	free(line);
 	close(fd);
@@ -75,12 +75,12 @@ char	**extract_lines(int fd, char *av)
 	char	**lines;
 
 	num_lines = count_lines(av);
-	lines = malloc(sizeof(char *) * (num_lines + 1));
-	if (num_lines == 0 || num_lines == -1 || lines == NULL)
+	if (num_lines == 0 || num_lines == -1)
 	{
-		ft_putstr_fd("Empty map or allocation memory has failed!\n", 2);
+		ft_putstr_fd("Error: empty map or allocation memory has failed!\n", 2);
 		return (NULL);
 	}
+	lines = allocate_memory_for_extract_lines(num_lines);
 	i = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
@@ -94,52 +94,3 @@ char	**extract_lines(int fd, char *av)
 	close(fd);
 	return (lines);
 }
-
-/*
-char	**ft_remove_empyt_lines(char **cpy_lines)
-{
-	int		i;
-	int		j;
-	int		num_lines;
-	char	**result;
-
-	if (cpy_lines == NULL)
-	{
-		ft_putstr_fd("Empty arr\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	num_lines = ft_size_2d_arr((void **)cpy_lines);
-	if (num_lines == 0)
-	{
-		ft_putstr_fd("Empty lines detected\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	result = malloc(sizeof(char *) * (num_lines + 1));
-	if (result == NULL)
-	{
-		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
-	}
-	i = 0;
-	j = 0;
-	while (cpy_lines[i] != NULL)
-	{
-		if (ft_strncmp(cpy_lines[i], "\n", 1) != 0 && cpy_lines[i][0] != '\0')
-		{
-			result[j] = ft_strdup(cpy_lines[i]);
-			if (result[j] == NULL)
-			{
-				ft_putstr_fd("ft_strdup failed\n", 2);
-				while (j > 0)
-					free(result[--j]);
-				free(result);
-				exit(EXIT_FAILURE);
-			}
-			j++;
-		}
-		i++;
-	}
-	result[j] = NULL;
-	return (result);
-}
-*/
