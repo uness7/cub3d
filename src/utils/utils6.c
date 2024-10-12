@@ -12,19 +12,16 @@
 
 #include "cub3d.h"
 
-static void	exit_on_error(char *message)
-{
-	ft_putstr_fd(message, 2);
-	exit(EXIT_FAILURE);
-}
-
 static char	**allocate_result_array(int num_lines)
 {
 	char	**result;
 
 	result = malloc(sizeof(char *) * (num_lines + 1));
 	if (result == NULL)
-		exit_on_error("malloc failed\n");
+	{
+		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
+		return (NULL);
+	}
 	return (result);
 }
 
@@ -35,7 +32,7 @@ static void	free_result_on_error(char **result, int j)
 	free(result);
 }
 
-static void	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
+static int	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 {
 	int	i;
 	int	j;
@@ -48,12 +45,23 @@ static void	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 		{
 			result[j] = ft_strdup(cpy_lines[i]);
 			if (result[j] == NULL)
+			{
 				free_result_on_error(result, j);
+				ft_putstr_fd("Error: ft_strdup has failed. \n", 2);
+				return (-1);
+			}
 			j++;
 		}
 		i++;
 	}
+	if (j == 0)
+	{
+		free(result);
+		result = NULL;	
+		return (-1);
+	}
 	result[j] = NULL;
+	return (0);
 }
 
 char	**ft_remove_empty_lines(char **cpy_lines)
@@ -62,12 +70,17 @@ char	**ft_remove_empty_lines(char **cpy_lines)
 	char	**result;
 
 	if (cpy_lines == NULL)
-		exit_on_error("Empty arr\n");
+	{
+		return (NULL);
+	}
 	num_lines = ft_size_2d_arr((void **)cpy_lines);
-	if (num_lines == 0)
-		exit_on_error("Empty lines detected\n");
+	if (num_lines == 0 || num_lines == -1)
+		return (NULL);
 	result = allocate_result_array(num_lines);
-	copy_non_empty_lines(result, cpy_lines, num_lines);
+	if (result == NULL)
+		return (NULL);
+	if (copy_non_empty_lines(result, cpy_lines, num_lines) == -1)
+		return (NULL);
 	return (result);
 }
 

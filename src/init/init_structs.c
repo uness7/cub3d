@@ -75,12 +75,11 @@ void	load_textures(t_game *game)
 			!is_null(game->map->textures.west_tx))
 	{
 		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
-		free_game(game);
-		exit(EXIT_FAILURE);
+		return ;
 	}
 }
 
-void	load_map(t_game *game, char **map, int num_lines)
+int	load_map(t_game *game, char **map, int num_lines)
 {
 	int	i;
 
@@ -89,10 +88,8 @@ void	load_map(t_game *game, char **map, int num_lines)
 	{
 		game->map->map_cpy[i] = ft_strdup(map[i]);
 		if (game->map->map_cpy[i] == NULL)
-		{
-			free_game(game);
-			exit(EXIT_FAILURE);
-		}
+			return (-1);
 	}
 	game->map->map_cpy[i] = NULL;
+	return (0);
 }

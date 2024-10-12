@@ -12,15 +12,18 @@
 
 #include "cub3d.h"
 
-static void	copy_color(char **dest, char *line)
+static int	copy_color(char **dest, char *line)
 {
+	if (line == NULL)
+		return (-1);
 	*dest = ft_strdup(line);
 	if (*dest == NULL)
 	{
 		ft_putstr_fd("Error: ft_strdup failed. \n", 2);
 		free(dest);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
+	return (0);
 }
 
 static bool	is_color(char *color)
@@ -39,14 +42,18 @@ static char	**copy_colors(char **cpy_lines)
 	colors = malloc(sizeof(char *) * NUM_OF_RGB_VALUES);
 	if (colors == NULL)
 	{
-		ft_putstr_fd("malloc failed\n", 2);
-		exit(EXIT_FAILURE);
+		ft_putstr_fd("Error: memory allocation had failed\n", 2);
+		return (NULL);
 	}
 	while (cpy_lines[++i] != NULL)
 	{
 		if (is_color(cpy_lines[i]) == true)
 		{
-			copy_color(&colors[j], cpy_lines[i]);
+			if (copy_color(&colors[j], cpy_lines[i]) == -1)
+			{
+				ft_free_2d_char(colors);
+				return (NULL);
+			}
 			j++;
 		}
 	}
@@ -54,11 +61,15 @@ static char	**copy_colors(char **cpy_lines)
 	return (colors);
 }
 
-void	validate_colors(t_game *game, char **cpy_lines)
+int	validate_colors(t_game *game, char **cpy_lines)
 {
 	char	**colors;
 
 	colors = copy_colors(cpy_lines);
+	if (colors == NULL)
+	{
+		return (-1);
+	}
 	if (ft_size_2d_arr((void **)colors) == 2 \
 			&& is_valid_colors(colors) \
 			&& is_colors_diff(colors))
@@ -68,8 +79,9 @@ void	validate_colors(t_game *game, char **cpy_lines)
 	}
 	else
 	{
-		ft_putstr_fd("Error detected in map\n", 2);
+		ft_putstr_fd("Error: something wrong detected in map\n", 2);
 		ft_free_2d_char(colors);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
+	return (0);
 }

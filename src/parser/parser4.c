@@ -12,17 +12,29 @@
 
 #include "cub3d.h"
 
-void	parse_textures_colors(char **lines, t_game *game)
+int	parse_textures_colors(char **lines, t_game *game)
 {
 	char	**cpy_lines;
 
 	cpy_lines = lines;
 	cpy_lines = ft_remove_empty_lines(cpy_lines);
 	if (cpy_lines == NULL)
-		exit(EXIT_FAILURE);
-	validate_textures(game, cpy_lines);
-	validate_colors(game, cpy_lines);
+	{
+		ft_free_2d_char(cpy_lines);
+		return (-1);
+	}
+	if (validate_textures(game, cpy_lines) == -1)
+	{
+		ft_free_2d_char(cpy_lines);
+		return (-1);
+	}
+	if (validate_colors(game, cpy_lines) == -1)
+	{
+		ft_free_2d_char(cpy_lines);
+		return (-1);
+	}
 	ft_free_2d_char(cpy_lines);
+	return (0);
 }
 
 int	parser(__attribute__((unused)) int ac, char **av, t_game *game)
@@ -41,8 +53,16 @@ int	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 		lines = extract_lines(fd, av[1], game);
 		if (lines == NULL)
 			return (-1);
-		//parse_textures_colors(lines, game);
-		//parse_map(game, lines);
+		if (parse_textures_colors(lines, game) == -1)
+		{
+			ft_free_2d_char(lines);
+			return (-1);
+		}
+		if (parse_map(game, lines) == -1)
+		{
+			ft_free_2d_char(lines);
+			return (-1);
+		}
 		ft_free_2d_char(lines);
 		close(fd);
 	}

@@ -78,11 +78,15 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		game = allocate_memory_for_game();
-		if (parser(ac, av, game) == -1) // parser returns -1 in failure
+		if (parser(ac, av, game) == -1)
 		{
 			free_game(game);
 			return (EXIT_FAILURE);
-		}		
+		}
+		init_max_x(game);
+		init_max_y(game);
+		init_x_row(game);
+		init_window(game);
 		free_game(game);		
 	}
 	else

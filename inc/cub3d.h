@@ -109,12 +109,12 @@ typedef struct s_game
 
 /* ---- src/parser/ ---- */
 int							parser(int ac, char **av, t_game *game);
-void						parse_textures_colors(char **lines, t_game *game);
+int							parse_textures_colors(char **lines, t_game *game);
 void						find_player(t_game *game, char **map);
 double						get_player_angle(t_game *game);
 void						init_player(t_game *game);
-void						validate_colors(t_game *game, char **cpy_lines);
-void						parse_map(t_game *game, char **arr);
+int						validate_colors(t_game *game, char **cpy_lines);
+int						parse_map(t_game *game, char **arr);
 
 /* ---- src/utils/ ---- */
 bool						check_file_format(const char *file_path,
@@ -124,7 +124,7 @@ bool						is_textures_formats(char **textures);
 bool						is_valid_colors(char **colors);
 bool						is_colors_diff(char **colors);
 char						**ft_remove_empty_lines(char **cpy_lines);
-void						validate_textures(t_game *game, char **cpy_lines);
+int						validate_textures(t_game *game, char **cpy_lines);
 int							parser(__attribute__((unused)) int ac, char **av,
 								t_game *game);
 
@@ -150,10 +150,10 @@ void						print_game_data(t_game *game);
 void						get_colors(t_game *game, char *rgb, char *space);
 void						init_colors(t_game *game, t_color colors,
 								char *space);
-void						get_textures(t_game *game, char **textures);
+int						get_textures(t_game *game, char **textures);
 void						load_textures(t_game *game);
 void						load_colors(t_game *game, char **colors);
-void						load_map(t_game *game, char **map, int num_lines);
+int						load_map(t_game *game, char **map, int num_lines);
 
 /* RAYCASTING */
 void						init_window(t_game *game);

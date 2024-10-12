@@ -50,13 +50,13 @@ bool	is_textures_formats(char **textures)
 		if (!split || !split[1])
 		{
 			ft_free_2d_char(split);
-			ft_putstr_fd("Something is wrong with the textures\n", 2);
+			ft_putstr_fd("Error: omething is wrong with the textures\n", 2);
 			return (false);
 		}
 		path = split[1];
 		if (check_file_format(path, "png") == false)
 		{
-			ft_putstr_fd("One of the textures files has invalid format\n", 2);
+			ft_putstr_fd("Error: ne of the textures files has invalid format\n", 2);
 			ft_free_2d_char(split);
 			return (false);
 		}
