@@ -33,6 +33,45 @@ static int	copy_texture(char **dest, char *line)
 	return (0);
 }
 
+static int	 check_double_textures(char **textures)
+{
+    bool no_seen = false;
+    bool so_seen = false;
+    bool ea_seen = false;
+    bool we_seen = false;
+
+    int i = 0;
+    while (textures[i] != NULL)
+    {
+        if (ft_strncmp(textures[i], "NO", 2) == 0)
+        {
+            if (no_seen)
+                return (-1);
+            no_seen = true;
+        }
+        else if (ft_strncmp(textures[i], "SO", 2) == 0)
+        {
+            if (so_seen)
+                return (-1);
+            so_seen = true;
+        }
+        else if (ft_strncmp(textures[i], "EA", 2) == 0)
+        {
+            if (ea_seen)
+                return (-1);
+            ea_seen = true;
+        }
+        else if (ft_strncmp(textures[i], "WE", 2) == 0)
+        {
+            if (we_seen)
+                return (-1);
+            we_seen = true;
+        }
+        i++;
+    }
+    return (0);
+}
+
 static char	**copy_textures(char **cpy_lines)
 {
 	int		i;
@@ -48,6 +87,12 @@ static char	**copy_textures(char **cpy_lines)
 	}
 	i = -1;
 	j = 0;
+	if (check_double_textures(cpy_lines) == -1)
+	{
+		ft_putstr_fd("Error: double textures were detected in map. \n", 2);
+		ft_free_2d_char(textures);
+		return (NULL);
+	}
 	while (cpy_lines[++i] != NULL)
 	{
 		if (is_valid(cpy_lines[i]) == true)
@@ -60,9 +105,19 @@ static char	**copy_textures(char **cpy_lines)
 			j++;
 		}
 	}
+	textures[j] = NULL;
 	return (textures);
 }
 
+
+
+/**
+ * validate_textures - Validates and loads the textures from the copied lines.
+ * @game: Pointer to the game structure.
+ * @cpy_lines: Array of strings containing texture definitions.
+ *
+ * Returns 0 on success, -1 on error.
+ */
 int		validate_textures(t_game *game, char **cpy_lines)
 {
 	char	**textures;
@@ -75,10 +130,10 @@ int		validate_textures(t_game *game, char **cpy_lines)
 	}
 	textures = copy_textures(cpy_lines);
 	if (textures == NULL)
-	{
 		return (-1);
-	}
-	if (ft_size_2d_arr((void **)textures) == 4 && is_textures_diff(textures) && is_textures_formats(textures))
+	if (ft_size_2d_arr((void **)textures) == 4 
+			&& is_textures_diff(textures) 
+			&& is_textures_formats(textures))
 	{
 		if (get_textures(game, textures) == -1)
 		{

@@ -3,6 +3,8 @@ NO ./textures/cobblestone/bright.png
 SO ./textures/cobblestone/dark.png
 EA ./textures/cobblestone/mediumbright.png
 WE ./textures/cobblestone/mediumdark.png
+WE ./textures/cobblestone/mediumdark.png
+WE ./textures/cobblestone/mediumdark.png
 
 C 14,108,196
 F 0,152,31

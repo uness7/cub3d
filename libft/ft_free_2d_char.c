@@ -26,7 +26,9 @@ void    ft_free_2d_char(char **arr)
     {
 
         free(arr[i]);
+        arr[i] = NULL;
         i++;
     }
     free(arr);
+    arr = NULL;
 }
