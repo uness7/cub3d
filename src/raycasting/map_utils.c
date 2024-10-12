@@ -6,13 +6,13 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:42:47 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/11 10:39:40 by yzioual          ###   ########.fr       */
+/*   Updated: 2024/10/12 11:41:17 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_x_row(t_game *game)
+int	init_x_row(t_game *game)
 {
 	int	i;
 	int	j;
@@ -20,8 +20,8 @@ void	init_x_row(t_game *game)
 	game->map->x_row = malloc(sizeof(int) * (game->map->max_y + 1));
 	if (game->map->x_row == NULL)
 	{
-		ft_putstr_fd("malloc failed", 2);
-		exit(EXIT_FAILURE);
+		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
+		return (-1);
 	}
 	i = 0;
 	j = 0;
@@ -31,30 +31,42 @@ void	init_x_row(t_game *game)
 		i++;
 		j++;
 	}
+	return (0);
 }
 
-void	init_max_y(t_game *game)
+int	init_max_y(t_game *game)
 {
 	int	i;
 
+	if (game == NULL)
+	{
+		ft_putstr_fd("Error: game structure is emtpy :, \n", 2);
+		return (-1);
+	}
 	i = 0;
 	while (game->map->map_cpy[i] != NULL)
 		i++;
 	game->map->max_y = i;
+	return (0);
 }
 
-void	init_max_x(t_game *game)
+int	init_max_x(t_game *game)
 {
 	int	i;
 	int	len;
 
+	if (game == NULL)
+	{
+		ft_putstr_fd("Error: game structure is emtpy :, \n", 2);
+		return (-1);
+	}
 	i = 0;
 	len = 0;
 	game->map->max_x = 0;
 	if (game->map->map_cpy == NULL)
 	{
 		ft_putstr_fd("Error: error in map is detected. \n", 2);
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	while (game->map->map_cpy[i] != NULL)
 	{
@@ -63,6 +75,7 @@ void	init_max_x(t_game *game)
 			game->map->max_x = len;
 		i++;
 	}
+	return (0);
 }
 
 bool	check_hit(t_game *game, double x, double y)

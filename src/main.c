@@ -6,7 +6,7 @@
 /*   By: yzioual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 10:39:37 by yzioual           #+#    #+#             */
-/*   Updated: 2024/10/11 09:37:36 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/12 11:43:05 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,21 @@ int	main(int ac, char **av)
 			free_game(game);
 			return (EXIT_FAILURE);
 		}
-		init_max_x(game);
-		init_max_y(game);
-		init_x_row(game);
+		if (init_max_x(game) == -1)
+		{
+			free_game(game);
+			return (EXIT_FAILURE);
+		}
+		if (init_max_y(game) == -1)
+		{
+			free_game(game);
+			return (EXIT_FAILURE);
+		}
+		if (init_x_row(game) == -1)
+		{
+			free_game(game);
+			return (EXIT_FAILURE);
+		}
 		init_window(game);
 		free_game(game);		
 	}

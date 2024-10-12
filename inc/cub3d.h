@@ -189,16 +189,11 @@ void						check_move(double new_x, double new_y,
 void						move_player(t_game *game, double new_x,
 								double new_y);
 
-void						init_max_x(t_game *game);
-void						init_max_y(t_game *game);
-void						init_x_row(t_game *game);
+int						init_max_x(t_game *game);
+int						init_max_y(t_game *game);
+int						init_x_row(t_game *game);
 
 /* Memory Management */
 void						free_game(t_game *game);
-// char						**allocate_memory_for_extract_lines(int num_lines);
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:42:36 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/03 11:42:38 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/12 11:38:42 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 double	get_h_inter(t_game *game)
 {

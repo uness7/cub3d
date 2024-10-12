@@ -6,11 +6,11 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:43:10 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/03 11:43:11 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/12 11:38:32 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 int	check_inter(t_game *game, double *step, double *inter, t_orientation o)
 {

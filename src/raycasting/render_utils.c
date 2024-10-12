@@ -6,11 +6,11 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:42:58 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/03 11:43:01 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/12 11:38:54 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	put_floor_sky(t_game *game, int ray, int top_p, int bottom_p)
 {
