@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 10:24:40 by tblot-la          #+#    #+#             */
+/*   Updated: 2024/10/14 10:24:47 by tblot-la         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -30,7 +42,6 @@ typedef enum e_valid_chars
 	SOUTH = 'S',
 	WEST = 'W',
 	EAST = 'E'
-
 }							t_valid_chars;
 
 typedef enum e_orientation
@@ -83,7 +94,7 @@ typedef struct s_map
 	unsigned int			max_y;
 }							t_map;
 
-typedef struct s_player
+typedef struct s_playerCub3D
 {
 	t_valid_chars			orientation;
 	double					angle;
@@ -113,8 +124,8 @@ int							parse_textures_colors(char **lines, t_game *game);
 void						find_player(t_game *game, char **map);
 double						get_player_angle(t_game *game);
 void						init_player(t_game *game);
-int						validate_colors(t_game *game, char **cpy_lines);
-int						parse_map(t_game *game, char **arr);
+int							validate_colors(t_game *game, char **cpy_lines);
+int							parse_map(t_game *game, char **arr);
 
 /* ---- src/utils/ ---- */
 bool						check_file_format(const char *file_path,
@@ -124,20 +135,19 @@ bool						is_textures_formats(char **textures);
 bool						is_valid_colors(char **colors);
 bool						is_colors_diff(char **colors);
 char						**ft_remove_empty_lines(char **cpy_lines);
-int						validate_textures(t_game *game, char **cpy_lines);
+int							validate_textures(t_game *game, char **cpy_lines);
 int							parser(__attribute__((unused)) int ac, char **av,
 								t_game *game);
 
 /* Map Validation */
-bool	is_map_valid(char **map, int num_lines); // Checker Function
+bool						is_map_valid(char **map, int num_lines);
 bool						check_adjacent_to_spaces(char **map, int rows);
 bool						check_row_longer_than_top(char **map, int rows);
 bool						check_row_longer_than_bottom(char **map, int rows);
-bool	check_first_nd_last_char(char **map, int num_lines); // Rule 4
-bool	has_multi_valid_chars(char **map, int rows);         // Rule 3
-bool	check_first_nd_last_rows(char **map, int rows);      // Rule 2
-bool	is_composed_of_valid_chars(char **map);              // Rule 1
-
+bool						check_first_nd_last_char(char **map, int num_lines);
+bool						has_multi_valid_chars(char **map, int rows);
+bool						check_first_nd_last_rows(char **map, int rows);
+bool						is_composed_of_valid_chars(char **map);
 int							count_lines(char *filename);
 
 char						**extract_lines(int fd, char *av, t_game *game);
@@ -150,10 +160,10 @@ void						print_game_data(t_game *game);
 void						get_colors(t_game *game, char *rgb, char *space);
 void						init_colors(t_game *game, t_color colors,
 								char *space);
-int						get_textures(t_game *game, char **textures);
+int							get_textures(t_game *game, char **textures);
 void						load_textures(t_game *game);
 void						load_colors(t_game *game, char **colors);
-int						load_map(t_game *game, char **map, int num_lines);
+int							load_map(t_game *game, char **map, int num_lines);
 
 /* RAYCASTING */
 void						init_window(t_game *game);
@@ -189,9 +199,9 @@ void						check_move(double new_x, double new_y,
 void						move_player(t_game *game, double new_x,
 								double new_y);
 
-int						init_max_x(t_game *game);
-int						init_max_y(t_game *game);
-int						init_x_row(t_game *game);
+int							init_max_x(t_game *game);
+int							init_max_y(t_game *game);
+int							init_x_row(t_game *game);
 
 /* Memory Management */
 void						free_game(t_game *game);
