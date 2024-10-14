@@ -37,8 +37,7 @@ t_game	*allocate_memory_for_game(void)
 void	free_game(t_game *game)
 {
 	if (game == NULL)
-		return;
-
+		return ;
 	if (game->map != NULL)
 	{
 		if (game->map->textures.north != NULL)
@@ -49,7 +48,6 @@ void	free_game(t_game *game)
 			free(game->map->textures.east);
 		if (game->map->textures.west != NULL)
 			free(game->map->textures.west);
-
 		if (game->map->textures.north_tx != NULL)
 			mlx_delete_texture(game->map->textures.north_tx);
 		if (game->map->textures.south_tx != NULL)
@@ -58,18 +56,14 @@ void	free_game(t_game *game)
 			mlx_delete_texture(game->map->textures.east_tx);
 		if (game->map->textures.west_tx != NULL)
 			mlx_delete_texture(game->map->textures.west_tx);
-
 		if (game->map->map_cpy != NULL)
 			ft_free_2d_char(game->map->map_cpy);
 		if (game->map->x_row != NULL)
 			free(game->map->x_row);
-
 		free(game->map);
 	}
-
 	free(game);
 }
-
 
 int	main(int ac, char **av)
 {
@@ -99,7 +93,7 @@ int	main(int ac, char **av)
 			return (EXIT_FAILURE);
 		}
 		init_window(game);
-		free_game(game);		
+		free_game(game);
 	}
 	else
 		ft_putstr_fd("You need to add a map. \n", 2);

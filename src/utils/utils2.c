@@ -50,13 +50,13 @@ bool	is_textures_formats(char **textures)
 		if (!split || !split[1])
 		{
 			ft_free_2d_char(split);
-			ft_putstr_fd("Error: omething is wrong with the textures\n", 2);
+			ft_putstr_fd("Error: something is wrong with the textures\n", 2);
 			return (false);
 		}
 		path = split[1];
 		if (check_file_format(path, "png") == false)
 		{
-			ft_putstr_fd("Error: ne of the textures files has invalid format\n", 2);
+			ft_putstr_fd("Error: textures files has invalid format\n", 2);
 			ft_free_2d_char(split);
 			return (false);
 		}
@@ -133,6 +133,6 @@ bool	is_colors_diff(char **colors)
 	}
 	if (counter == 2)
 		return (true);
-	ft_putstr_fd("Error: floor or Ceiling colors is not valid (maybe both)\n", 2);
+	ft_putstr_fd("Error: F or C colors is not valid (maybe both)\n", 2);
 	return (false);
 }

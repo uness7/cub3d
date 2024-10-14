@@ -14,9 +14,9 @@
 
 static bool	is_valid(char *line)
 {
-	return (ft_strncmp(line, "NO", 2) == 0 
+	return (ft_strncmp(line, "NO", 2) == 0
 		|| ft_strncmp(line, "SO", 2) == 0
-		|| ft_strncmp(line, "EA", 2) == 0 
+		|| ft_strncmp(line, "EA", 2) == 0
 		|| ft_strncmp(line, "WE", 2) == 0);
 }
 
@@ -27,49 +27,54 @@ static int	copy_texture(char **dest, char *line)
 	*dest = ft_strdup(line);
 	if (*dest == NULL)
 	{
-		ft_putstr_fd("Error: memory allocation has failed. \n", 2);		
+		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
 		return (-1);
 	}
 	return (0);
 }
 
-static int	 check_double_textures(char **textures)
+static int	check_double_textures(char **textures)
 {
-    bool no_seen = false;
-    bool so_seen = false;
-    bool ea_seen = false;
-    bool we_seen = false;
+	bool	no_seen;
+	bool	so_seen;
+	bool	ea_seen;
+	bool	we_seen;
+	int		i;
 
-    int i = 0;
-    while (textures[i] != NULL)
-    {
-        if (ft_strncmp(textures[i], "NO", 2) == 0)
-        {
-            if (no_seen)
-                return (-1);
-            no_seen = true;
-        }
-        else if (ft_strncmp(textures[i], "SO", 2) == 0)
-        {
-            if (so_seen)
-                return (-1);
-            so_seen = true;
-        }
-        else if (ft_strncmp(textures[i], "EA", 2) == 0)
-        {
-            if (ea_seen)
-                return (-1);
-            ea_seen = true;
-        }
-        else if (ft_strncmp(textures[i], "WE", 2) == 0)
-        {
-            if (we_seen)
-                return (-1);
-            we_seen = true;
-        }
-        i++;
-    }
-    return (0);
+	no_seen = false;
+	so_seen = false;
+	ea_seen = false;
+	we_seen = false;
+	i = 0;
+	while (textures[i] != NULL)
+	{
+		if (ft_strncmp(textures[i], "NO", 2) == 0)
+		{
+			if (no_seen)
+				return (-1);
+			no_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "SO", 2) == 0)
+		{
+			if (so_seen)
+				return (-1);
+			so_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "EA", 2) == 0)
+		{
+			if (ea_seen)
+				return (-1);
+			ea_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "WE", 2) == 0)
+		{
+			if (we_seen)
+				return (-1);
+			we_seen = true;
+		}
+		i++;
+	}
+	return (0);
 }
 
 static char	**copy_textures(char **cpy_lines)
@@ -77,7 +82,7 @@ static char	**copy_textures(char **cpy_lines)
 	int		i;
 	int		j;
 	char	**textures;
-	
+
 	textures = malloc(sizeof(char *) * (NUM_OF_TEXTURES + 1));
 	ft_memset(textures, 0, sizeof(char *) * (NUM_OF_TEXTURES + 1));
 	if (textures == NULL)
@@ -109,16 +114,7 @@ static char	**copy_textures(char **cpy_lines)
 	return (textures);
 }
 
-
-
-/**
- * validate_textures - Validates and loads the textures from the copied lines.
- * @game: Pointer to the game structure.
- * @cpy_lines: Array of strings containing texture definitions.
- *
- * Returns 0 on success, -1 on error.
- */
-int		validate_textures(t_game *game, char **cpy_lines)
+int	validate_textures(t_game *game, char **cpy_lines)
 {
 	char	**textures;
 
@@ -131,9 +127,9 @@ int		validate_textures(t_game *game, char **cpy_lines)
 	textures = copy_textures(cpy_lines);
 	if (textures == NULL)
 		return (-1);
-	if (ft_size_2d_arr((void **)textures) == 4 
-			&& is_textures_diff(textures) 
-			&& is_textures_formats(textures))
+	if (ft_size_2d_arr((void **)textures) == 4
+		&& is_textures_diff(textures)
+		&& is_textures_formats(textures))
 	{
 		if (get_textures(game, textures) == -1)
 		{

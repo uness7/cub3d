@@ -90,7 +90,7 @@ char	**extract_lines(int fd, char *av, t_game *game)
 	num_lines = count_lines(av);
 	if (num_lines == 0 || num_lines == -1)
 	{
-		ft_putstr_fd("Error: empty map or allocation memory has failed!\n", 2);		
+		ft_putstr_fd("Error: empty map or allocation memory has failed!\n", 2);
 		return (NULL);
 	}
 	lines = allocate_memory_for_extract_lines(num_lines);

@@ -57,7 +57,7 @@ static int	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 	if (j == 0)
 	{
 		free(result);
-		result = NULL;	
+		result = NULL;
 		return (-1);
 	}
 	result[j] = NULL;

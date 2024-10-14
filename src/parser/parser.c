@@ -59,18 +59,11 @@ int	validate_map_for_parsing(t_game *game, char **map, int num_lines)
 	{
 		game->map->map_cpy = allocate_map(num_lines);
 		if (game->map->map_cpy == NULL)
-		{
-			// cleanup(map, num_lines);
-			// ft_free_2d_char(lines);
 			return (-1);
-		}
 		find_player(game, map);
-		load_map(game, map, num_lines);	
-		// cleanup(map, num_lines);	
+		load_map(game, map, num_lines);
 		return (0);
 	}
-	// cleanup(map, num_lines);
-	// ft_free_2d_char(lines);
 	return (-1);
 }
 
