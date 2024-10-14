@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
-# include "../inc/get_next_line.h"
+#include "libft.h"
+#include "../inc/get_next_line.h"
 
 char	*ft_update_buffer(char *buffer)
 {

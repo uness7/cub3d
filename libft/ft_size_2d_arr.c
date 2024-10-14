@@ -25,4 +25,4 @@ int	ft_size_2d_arr(void **arr)
 	while (arr[i] != NULL)
 		i++;
 	return (i);
-}	
+}

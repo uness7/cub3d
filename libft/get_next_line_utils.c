@@ -27,8 +27,6 @@ char	*ft_strchr_gnl_gnl(char *s, int c)
 	return (0);
 }
 
-
-
 void	*ft_memset_gnl(void *s, int c, size_t n)
 {
 	unsigned char	*p;
@@ -79,7 +77,8 @@ char	*ft_strjoin_gnl(char *result, char *buffer)
 	}
 	if (!result || !buffer)
 		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen_gnl(result) + ft_strlen_gnl(buffer)) + 1));
+	str = malloc(sizeof(char) * ((ft_strlen_gnl(result)
+					+ ft_strlen_gnl(buffer)) + 1));
 	if (str == NULL)
 		return (NULL);
 	i = -1;

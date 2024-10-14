@@ -12,23 +12,22 @@
 
 #include "libft.h"
 
-void    ft_free_2d_char(char **arr)
+void	ft_free_2d_char(char **arr)
 {
-    int     i;
+	int	i;
 
-    i = 0;
-    if (arr == NULL)
-    {
-        ft_putstr_fd("Empty 2d array ft_free_2d_char\n", 2);        
-        return ;        
-    }
-    while (arr[i] != NULL)
-    {
-
-        free(arr[i]);
-        arr[i] = NULL;
-        i++;
-    }
-    free(arr);
-    arr = NULL;
+	i = 0;
+	if (arr == NULL)
+	{
+		ft_putstr_fd("Empty 2d array ft_free_2d_char\n", 2);
+		return ;
+	}
+	while (arr[i] != NULL)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
+	arr = NULL;
 }

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "libft.h"
+#include "libft.h"
 
 void	ft_put2d_char(char **arr)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	while (arr[++i] != NULL)
