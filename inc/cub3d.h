@@ -6,7 +6,7 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 10:24:40 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/14 10:24:47 by tblot-la         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:58:58 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@
 
 # define NUM_OF_RGB_VALUES 3
 # define NUM_OF_TEXTURES 4
+
+typedef struct seen
+{
+	bool	no_seen;
+	bool	so_seen;
+	bool	we_seen;
+	bool	ea_seen;
+}	t_seen;
+
 
 typedef enum e_valid_chars
 {

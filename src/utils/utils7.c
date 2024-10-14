@@ -6,7 +6,7 @@
 /*   By: tblot-la <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:57:14 by tblot-la          #+#    #+#             */
-/*   Updated: 2024/10/11 10:16:16 by yzioual          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:04:15 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,59 @@ int	count_lines(char *filename)
 	return (num_lines);
 }
 
+void	toggle_bool(bool *b)
+{
+	*b = !(*b);
+}
+
+static	int	helper_fun(char **textures, int *i, t_seen seen)
+{
+	if (ft_strncmp(textures[*i], "NO", 2) == 0)
+	{
+		if (seen.no_seen)
+			return (-1);
+		//no_seen = true;
+		toggle_bool(&seen.no_seen);
+	}
+	else if (ft_strncmp(textures[*i], "SO", 2) == 0)
+	{
+		if (seen.so_seen)
+			return (-1);
+		//so_seen = true;
+		toggle_bool(&seen.so_seen);
+	}
+	else if (ft_strncmp(textures[*i], "EA", 2) == 0)
+	{
+		if (seen.ea_seen)
+			return (-1);
+		//ea_seen = true;o
+		toggle_bool(&seen.ea_seen);
+	}
+	else if (ft_strncmp(textures[*i], "WE", 2) == 0)
+	{
+		if (seen.we_seen)
+			return (-1);
+		//we_seen = true;o
+		toggle_bool(&seen.we_seen);
+	}
+	return (0);
+}
+
 int	check_double_textures(char **textures)
 {
-	bool	no_seen;
-	bool	so_seen;
-	bool	ea_seen;
-	bool	we_seen;
+	t_seen		seen;
 	int		i;
 
-	no_seen = false;
-	so_seen = false;
-	ea_seen = false;
-	we_seen = false;
+	seen.no_seen = false;
+	seen.so_seen = false;
+	seen.ea_seen = false;
+	seen.we_seen = false;
 	i = 0;
 	while (textures[i] != NULL)
 	{
+		if (helper_fun(textures, &i, seen) == -1)
+			return (-1);
+		/*
 		if (ft_strncmp(textures[i], "NO", 2) == 0)
 		{
 			if (no_seen)
@@ -95,6 +133,7 @@ int	check_double_textures(char **textures)
 				return (-1);
 			we_seen = true;
 		}
+		*/
 		i++;
 	}
 	return (0);
