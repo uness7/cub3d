@@ -6,7 +6,7 @@
 /*   By: yzioual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:51:03 by yzioual           #+#    #+#             */
-/*   Updated: 2024/10/14 17:20:00 by yzioual          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:27:07 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static char	**copy_valid_textures(char **textures, char **cpy_lines)
 		{
 			if (j >= 4 || copy_texture(&textures[j], cpy_lines[i]) == -1)
 			{
+				ft_putstr_fd("Error: double textures or something went wrong with memory. \n", 2);
 				ft_free_2d_char(textures);
 				return (NULL);
 			}
