@@ -34,28 +34,33 @@ t_game	*allocate_memory_for_game(void)
 	return (game);
 }
 
+static void	free_textures(t_game *game)
+{
+	if (game->map->textures.north != NULL)
+		free(game->map->textures.north);
+	if (game->map->textures.south != NULL)
+		free(game->map->textures.south);
+	if (game->map->textures.east != NULL)
+		free(game->map->textures.east);
+	if (game->map->textures.west != NULL)
+		free(game->map->textures.west);
+	if (game->map->textures.north_tx != NULL)
+		mlx_delete_texture(game->map->textures.north_tx);
+	if (game->map->textures.south_tx != NULL)
+		mlx_delete_texture(game->map->textures.south_tx);
+	if (game->map->textures.east_tx != NULL)
+		mlx_delete_texture(game->map->textures.east_tx);
+	if (game->map->textures.west_tx != NULL)
+		mlx_delete_texture(game->map->textures.west_tx);
+}
+
 void	free_game(t_game *game)
 {
 	if (game == NULL)
 		return ;
 	if (game->map != NULL)
 	{
-		if (game->map->textures.north != NULL)
-			free(game->map->textures.north);
-		if (game->map->textures.south != NULL)
-			free(game->map->textures.south);
-		if (game->map->textures.east != NULL)
-			free(game->map->textures.east);
-		if (game->map->textures.west != NULL)
-			free(game->map->textures.west);
-		if (game->map->textures.north_tx != NULL)
-			mlx_delete_texture(game->map->textures.north_tx);
-		if (game->map->textures.south_tx != NULL)
-			mlx_delete_texture(game->map->textures.south_tx);
-		if (game->map->textures.east_tx != NULL)
-			mlx_delete_texture(game->map->textures.east_tx);
-		if (game->map->textures.west_tx != NULL)
-			mlx_delete_texture(game->map->textures.west_tx);
+		free_textures(game);
 		if (game->map->map_cpy != NULL)
 			ft_free_2d_char(game->map->map_cpy);
 		if (game->map->x_row != NULL)
@@ -77,17 +82,8 @@ int	main(int ac, char **av)
 			free_game(game);
 			return (EXIT_FAILURE);
 		}
-		if (init_max_x(game) == -1)
-		{
-			free_game(game);
-			return (EXIT_FAILURE);
-		}
-		if (init_max_y(game) == -1)
-		{
-			free_game(game);
-			return (EXIT_FAILURE);
-		}
-		if (init_x_row(game) == -1)
+		if (init_max_x(game) == -1 || init_max_y(game) == -1
+			|| init_x_row(game) == -1)
 		{
 			free_game(game);
 			return (EXIT_FAILURE);

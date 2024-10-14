@@ -14,10 +14,8 @@
 
 static bool	is_valid(char *line)
 {
-	return (ft_strncmp(line, "NO", 2) == 0
-		|| ft_strncmp(line, "SO", 2) == 0
-		|| ft_strncmp(line, "EA", 2) == 0
-		|| ft_strncmp(line, "WE", 2) == 0);
+	return (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "EA", 2) == 0 || ft_strncmp(line, "WE", 2) == 0);
 }
 
 static int	copy_texture(char **dest, char *line)
@@ -127,8 +125,7 @@ int	validate_textures(t_game *game, char **cpy_lines)
 	textures = copy_textures(cpy_lines);
 	if (textures == NULL)
 		return (-1);
-	if (ft_size_2d_arr((void **)textures) == 4
-		&& is_textures_diff(textures)
+	if (ft_size_2d_arr((void **)textures) == 4 && is_textures_diff(textures)
 		&& is_textures_formats(textures))
 	{
 		if (get_textures(game, textures) == -1)

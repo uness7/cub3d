@@ -32,6 +32,23 @@ static void	free_result_on_error(char **result, int j)
 	free(result);
 }
 
+static int	detect_empty_lines(char **result, char **cpy_lines, int *i, int *j)
+{
+	if (ft_strncmp(cpy_lines[*i], "\n", 1) != 0 && cpy_lines[*i][0] != '\0')
+	{
+		result[*j] = ft_strdup(cpy_lines[*i]);
+		if (result[*j] == NULL)
+		{
+			free_result_on_error(result, *j);
+			ft_putstr_fd("Error: ft_strdup has failed. \n", 2);
+			return (-1);
+		}
+		(*j)++;
+	}
+	(*i)++;
+	return (0);
+}
+
 static int	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 {
 	int	i;
@@ -40,20 +57,8 @@ static int	copy_non_empty_lines(char **result, char **cpy_lines, int num_lines)
 	i = 0;
 	j = 0;
 	while (i < num_lines && cpy_lines[i] != NULL)
-	{
-		if (ft_strncmp(cpy_lines[i], "\n", 1) != 0 && cpy_lines[i][0] != '\0')
-		{
-			result[j] = ft_strdup(cpy_lines[i]);
-			if (result[j] == NULL)
-			{
-				free_result_on_error(result, j);
-				ft_putstr_fd("Error: ft_strdup has failed. \n", 2);
-				return (-1);
-			}
-			j++;
-		}
-		i++;
-	}
+		if (detect_empty_lines(result, cpy_lines, &i, &j) == -1)
+			return (-1);
 	if (j == 0)
 	{
 		free(result);
