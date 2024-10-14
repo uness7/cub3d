@@ -73,3 +73,8 @@ int	parse_map(t_game *game, char **arr)
 	ft_free_2d_char(map);
 	return (0);
 }
+
+void	toggle_bool(bool *b)
+{
+	*b = !(*b);
+}

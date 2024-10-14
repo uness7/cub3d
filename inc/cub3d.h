@@ -36,12 +36,11 @@
 
 typedef struct seen
 {
-	bool	no_seen;
-	bool	so_seen;
-	bool	we_seen;
-	bool	ea_seen;
-}	t_seen;
-
+	bool			no_seen;
+	bool			so_seen;
+	bool			we_seen;
+	bool			ea_seen;
+}					t_seen;
 
 typedef enum e_valid_chars
 {
@@ -152,6 +151,7 @@ char				**ft_remove_empty_lines(char **cpy_lines);
 int					validate_textures(t_game *game, char **cpy_lines);
 int					parser(__attribute__((unused)) int ac, char **av,
 						t_game *game);
+void				toggle_bool(bool *b);
 
 /* Map Validation */
 bool				is_map_valid(char **map, int num_lines);

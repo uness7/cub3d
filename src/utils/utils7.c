@@ -56,39 +56,30 @@ int	count_lines(char *filename)
 	return (num_lines);
 }
 
-void	toggle_bool(bool *b)
-{
-	*b = !(*b);
-}
-
-static	int	helper_fun(char **textures, int *i, t_seen seen)
+static int	helper_fun(char **textures, int *i, t_seen seen)
 {
 	if (ft_strncmp(textures[*i], "NO", 2) == 0)
 	{
 		if (seen.no_seen)
 			return (-1);
-		//no_seen = true;
 		toggle_bool(&seen.no_seen);
 	}
 	else if (ft_strncmp(textures[*i], "SO", 2) == 0)
 	{
 		if (seen.so_seen)
 			return (-1);
-		//so_seen = true;
 		toggle_bool(&seen.so_seen);
 	}
 	else if (ft_strncmp(textures[*i], "EA", 2) == 0)
 	{
 		if (seen.ea_seen)
 			return (-1);
-		//ea_seen = true;o
 		toggle_bool(&seen.ea_seen);
 	}
 	else if (ft_strncmp(textures[*i], "WE", 2) == 0)
 	{
 		if (seen.we_seen)
 			return (-1);
-		//we_seen = true;o
 		toggle_bool(&seen.we_seen);
 	}
 	return (0);
@@ -96,45 +87,16 @@ static	int	helper_fun(char **textures, int *i, t_seen seen)
 
 int	check_double_textures(char **textures)
 {
-	t_seen		seen;
+	t_seen	seen;
 	int		i;
 
 	seen.no_seen = false;
 	seen.so_seen = false;
 	seen.ea_seen = false;
 	seen.we_seen = false;
-	i = 0;
-	while (textures[i] != NULL)
-	{
+	i = -1;
+	while (textures[++i] != NULL)
 		if (helper_fun(textures, &i, seen) == -1)
 			return (-1);
-		/*
-		if (ft_strncmp(textures[i], "NO", 2) == 0)
-		{
-			if (no_seen)
-				return (-1);
-			no_seen = true;
-		}
-		else if (ft_strncmp(textures[i], "SO", 2) == 0)
-		{
-			if (so_seen)
-				return (-1);
-			so_seen = true;
-		}
-		else if (ft_strncmp(textures[i], "EA", 2) == 0)
-		{
-			if (ea_seen)
-				return (-1);
-			ea_seen = true;
-		}
-		else if (ft_strncmp(textures[i], "WE", 2) == 0)
-		{
-			if (we_seen)
-				return (-1);
-			we_seen = true;
-		}
-		*/
-		i++;
-	}
 	return (0);
 }
