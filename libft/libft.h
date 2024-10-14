@@ -6,7 +6,7 @@
 /*   By: yzioual <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:38:38 by yzioual           #+#    #+#             */
-/*   Updated: 2023/11/04 12:30:04 by yzioual          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:33:35 by yzioual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -14,6 +14,14 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef struct s_split_fun
+{
+	int             word_len;
+	int             words_count;                                                              int             temp;
+	int             start;
+	char    **result;
+}       t_split_fun;
 
 typedef struct s_list
 {

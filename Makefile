@@ -9,7 +9,7 @@ MLX_LIB = mlx/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-TARGET = Cub3D
+TARGET = cub3D
 
 BLUE = \033[34m
 YELLOW = \033[33m
