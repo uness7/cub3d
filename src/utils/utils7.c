@@ -55,3 +55,47 @@ int	count_lines(char *filename)
 	close(fd);
 	return (num_lines);
 }
+
+int	check_double_textures(char **textures)
+{
+	bool	no_seen;
+	bool	so_seen;
+	bool	ea_seen;
+	bool	we_seen;
+	int		i;
+
+	no_seen = false;
+	so_seen = false;
+	ea_seen = false;
+	we_seen = false;
+	i = 0;
+	while (textures[i] != NULL)
+	{
+		if (ft_strncmp(textures[i], "NO", 2) == 0)
+		{
+			if (no_seen)
+				return (-1);
+			no_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "SO", 2) == 0)
+		{
+			if (so_seen)
+				return (-1);
+			so_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "EA", 2) == 0)
+		{
+			if (ea_seen)
+				return (-1);
+			ea_seen = true;
+		}
+		else if (ft_strncmp(textures[i], "WE", 2) == 0)
+		{
+			if (we_seen)
+				return (-1);
+			we_seen = true;
+		}
+		i++;
+	}
+	return (0);
+}

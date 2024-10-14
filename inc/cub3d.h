@@ -126,6 +126,12 @@ double				get_player_angle(t_game *game);
 void				init_player(t_game *game);
 int					validate_colors(t_game *game, char **cpy_lines);
 int					parse_map(t_game *game, char **arr);
+int					check_double_textures(char **textures);
+char				**copy_textures(char **cpy_lines);
+char				**copy_colors(char **cpy_lines);
+int					copy_valid_map(t_game *game, char **map, char **lines,
+						int num_lines);
+char				**allocate_map(int num_lines);
 
 /* ---- src/utils/ ---- */
 bool				check_file_format(const char *file_path, char *format);

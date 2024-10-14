@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static char	**allocate_map(int num_lines)
+char	**allocate_map(int num_lines)
 {
 	int		i;
 	char	**map;
@@ -67,25 +67,8 @@ int	validate_map_for_parsing(t_game *game, char **map, int num_lines)
 	return (-1);
 }
 
-int	parse_map(t_game *game, char **arr)
+int	copy_valid_map(t_game *game, char **map, char **lines, int num_lines)
 {
-	char	**lines;
-	int		num_lines;
-	char	**map;
-
-	lines = ft_remove_empty_lines(arr);
-	if (lines == NULL)
-	{
-		ft_putstr_fd("Error: memory allocation has failed. \n", 2);
-		return (-1);
-	}
-	num_lines = ft_size_2d_arr((void **)(lines + 6));
-	if (num_lines == 0 || num_lines == -1)
-	{
-		ft_free_2d_char(lines);
-		return (-1);
-	}
-	map = allocate_map(num_lines);
 	if (map == NULL)
 	{
 		ft_free_2d_char(lines);
@@ -103,7 +86,5 @@ int	parse_map(t_game *game, char **arr)
 		ft_free_2d_char(lines);
 		return (-1);
 	}
-	ft_free_2d_char(lines);
-	ft_free_2d_char(map);
 	return (0);
 }

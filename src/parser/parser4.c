@@ -42,34 +42,25 @@ int	parser(__attribute__((unused)) int ac, char **av, t_game *game)
 	int		fd;
 	char	**lines;
 
-	if (check_file_format(av[1], "cub"))
-	{
-		fd = open(av[1], O_RDONLY);
-		if (fd < 0)
-		{
-			ft_putstr_fd("Error: open failed. \n", 2);
-			return (-1);
-		}
-		lines = extract_lines(fd, av[1], game);
-		if (lines == NULL)
-			return (-1);
-		if (parse_textures_colors(lines, game) == -1)
-		{
-			ft_free_2d_char(lines);
-			return (-1);
-		}
-		if (parse_map(game, lines) == -1)
-		{
-			ft_free_2d_char(lines);
-			return (-1);
-		}
-		ft_free_2d_char(lines);
-		close(fd);
-	}
-	else
+	if (!check_file_format(av[1], "cub"))
 	{
 		ft_putstr_fd("bad format\n", 2);
 		return (-1);
 	}
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error: open failed. \n", 2);
+		return (-1);
+	}
+	lines = extract_lines(fd, av[1], game);
+	if (lines == NULL || parse_textures_colors(lines, game) == -1
+		|| parse_map(game, lines) == -1)
+	{
+		ft_free_2d_char(lines);
+		return (-1);
+	}
+	ft_free_2d_char(lines);
+	close(fd);
 	return (0);
 }
